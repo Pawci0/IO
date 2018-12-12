@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{DB9CF11A-441C-4090-BACE-C74113C8AAB2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{01EE2B4C-6D4D-465D-9C7B-5F637D54AE6A}"
+	ProjectSection(SolutionItems) = preProject
+		Backend\Database\packages.config = Backend\Database\packages.config
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Backend\Database\Database.csproj", "{2B654924-808D-4117-A0F8-9C40595744E3}"
 EndProject
