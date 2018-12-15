@@ -1,4 +1,7 @@
-﻿using System.Web.Http;
+﻿using System.Linq;
+using System.Net.Http.Formatting;
+using System.Web.Http;
+using Newtonsoft.Json.Serialization;
 using RestApi.Filters;
 
 namespace RestApi
@@ -15,7 +18,11 @@ namespace RestApi
                 defaults: new { id = RouteParameter.Optional }
             );
             
+            config.Filters.Add(new AuthorizeAttribute());
             config.Filters.Add(new UserValidationFilter());
+            
+            JsonMediaTypeFormatter jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
+            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
     }
 }

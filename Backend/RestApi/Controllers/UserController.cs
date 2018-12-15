@@ -24,6 +24,7 @@ namespace RestApi.Controllers
         }
 
         // POST: api/User
+        [AllowAnonymous]
         public void Post([FromBody]UserDto value)
         {
             _userService.CreateUser(value);

@@ -23,6 +23,18 @@ namespace User
 
             return null;
         }
+        
+        public UserDto GetUser(string username)
+        {
+            Database.User user = _database.GetUserByUsername(username);
+            if (user != null)
+            {
+                return new UserDto(user.User_Id, user.Username, user.Password,
+                    user.Email, user.Name, user.Surname);
+            }
+
+            return null;
+        }
 
         public void CreateUser(UserDto user)
         {

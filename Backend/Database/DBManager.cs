@@ -34,6 +34,16 @@ namespace Database
                         select user).FirstOrDefault();
             }
         }
+        
+        public User GetUserByUsername(string username)
+        {
+            using (var ctx = new katalogrzeczyEntities())
+            {
+                return (from User user in ctx.Users
+                    where user.Username == username
+                    select user).FirstOrDefault();
+            }
+        }
 
         public void DeleteUserById(int id)
         {
