@@ -1,4 +1,5 @@
 ﻿using Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,7 +19,7 @@ namespace Recommendation
             var ratings = GetUserRatings(userId);
             var bestRatings = ratings.OrderBy(rating => rating.Value).Take(amount);
             var bestRatedProducts = GetProductsFromRatings(bestRatings);
-            return GetProductsFromBestCategories(bestRatedProducts);
+            return GetProductsFromBestCategories(bestRatedProducts, amount);
         }
 
         private IEnumerable<Rating> GetUserRatings(int userId)
@@ -38,7 +39,7 @@ namespace Recommendation
             return ret;
         }
 
-        private IEnumerable<Product> GetProductsFromBestCategories(IEnumerable<Product> best)
+        private IEnumerable<Product> GetProductsFromBestCategories(IEnumerable<Product> best, int target)
         {
             var allProducts = db.GetAllProducts();
             List<Product> ret = new List<Product>();
@@ -46,9 +47,29 @@ namespace Recommendation
             {
                 var temp = (from Product product in allProducts
                            where product.Category_Id.Equals(item.Category_Id)
-                           select product).OrderBy(product => product.Ratings.Sum(rating => rating.Value)/product.Ratings.Count).First();
-                allProducts.Remove(temp);
-                ret.Add(temp);
+                           select product).OrderBy(product => product.Ratings.Sum(rating => rating.Value)/product.Ratings.Count).FirstOrDefault();
+                if (!temp.Equals(null))
+                {
+                    allProducts.Remove(temp);
+                    ret.Add(temp);
+                }
+            }
+            if(ret.Count < target)
+            {
+                var rng = new Random();
+                do
+                {
+                    if (allProducts.Count > 0)
+                    {
+                        int index = rng.Next(allProducts.Count);
+                        ret.Add(allProducts.ElementAt(index));
+                        allProducts.RemoveAt(index);
+                    }
+                    else
+                    {
+                        ret.Add(null);
+                    }
+                } while (ret.Count < target);
             }
             return ret;
         }
