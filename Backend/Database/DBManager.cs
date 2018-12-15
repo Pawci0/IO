@@ -79,7 +79,6 @@ namespace Database
         }
         #endregion
 
-
         #region ProductCUD
 
         public void CreateProduct(string name, int categoryId, int  userId, string description = null)

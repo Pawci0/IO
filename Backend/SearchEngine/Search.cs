@@ -9,8 +9,8 @@ namespace SearchEngine
     public static class Search
     {    
         /// <summary>
-         /// Compute the distance between two strings.
-         /// </summary>
+        /// Compute the distance between two strings.
+        /// </summary>
         public static int LevenshteinDistance(string a, string b)
         {
 
@@ -65,7 +65,7 @@ namespace SearchEngine
 
         }
 
-        public static bool ContainsFuzzy(string target, string searched)
+        public static bool ContainsFuzzy(this string target, string searched)
     {
         // cheap stuff first
         if (target == searched) return true;

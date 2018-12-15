@@ -16,7 +16,7 @@ namespace SearchEngine
             var myList = new List<string>{"ala ma kota", "element"};
 
             var results = from value in myList
-                where ContainsFuzzy(value, "kot")
+                where value.ContainsFuzzy("kot")
                 select value;
 
             Assert.AreEqual(1, results.Count());
