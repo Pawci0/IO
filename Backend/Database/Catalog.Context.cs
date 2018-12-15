@@ -27,7 +27,7 @@ namespace Database
         }
 
         public katalogrzeczyEntities()
-            : base("name=katalogrzeczyEntities")
+            : base("katalogrzeczyEntities")
         {
         }
     
