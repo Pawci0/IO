@@ -9,7 +9,7 @@ namespace Recommendation
 {
     public class RecommendationEngine : IRecommendation
     {
-        private DBManager db;
+        private readonly DBManager db;
         public RecommendationEngine()
         {
             db = new DBManager();
@@ -23,14 +23,7 @@ namespace Recommendation
         private IRecommendation SelectEngine()
         {            
             var ratings = db.GetAllRatings();
-            if(ratings.Count == 0)
-            {
-                return new RandomRecommendation(db);
-            }
-            else
-            {
-                return new PersonalizedRecommendation(db);
-            }
+            return ratings.Count > 0 ? (IRecommendation)new PersonalizedRecommendation(db) : new RandomRecommendation(db);
         }
     }
 }

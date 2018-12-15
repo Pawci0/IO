@@ -6,7 +6,7 @@ namespace Recommendation
 {
     class RandomRecommendation : IRecommendation
     {
-        private DBManager db;
+        private readonly DBManager db;
         public RandomRecommendation(DBManager db)
         {
             this.db = db;
@@ -14,7 +14,6 @@ namespace Recommendation
 
         public IEnumerable<Product> GetRecommendedProducts(int userId, int amount)
         {
-            return db.GetAllProducts().Shuffle().Take(amount);
-        }
+            return db.GetAllProducts().Shuffle().Take(amount);        }
     }
 }
