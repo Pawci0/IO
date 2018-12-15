@@ -17,7 +17,7 @@ namespace Recommendation
 
         public IEnumerable<Product> GetRecommendedProducts(int userId, int amount)
         {
-            throw new NotImplementedException();
+            return SelectEngine().GetRecommendedProducts(userId, amount);
         }
 
         private IRecommendation SelectEngine()
@@ -29,7 +29,7 @@ namespace Recommendation
             }
             else
             {
-                // personalized recommendation engine
+                return new PersonalizedRecommendation(db);
             }
         }
     }
