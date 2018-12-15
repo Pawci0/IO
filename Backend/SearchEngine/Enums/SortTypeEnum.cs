@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchEngine.Enums
 {
-    enum SortTypeEnum
+    public enum SortTypeEnum
     {
         ignore,
         ascending,

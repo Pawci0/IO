@@ -3,75 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Database;
+using SearchEngine.Enums;
 
 namespace SearchEngine
 {
-    public static class Search
-    {    
-        /// <summary>
-        /// Compute the distance between two strings.
-        /// </summary>
-        public static int LevenshteinDistance(string a, string b)
+    internal abstract class SearchBase<T> : ISearch<T> where T : class
+    {
+        protected List<T> searchResult;
+        protected DBManager dataContext = new DBManager();
+
+
+        public IEnumerable<T> GetSearchResults()
         {
-
-            if (string.IsNullOrEmpty(a))
+            if (searchResult == null)
             {
-                if (!string.IsNullOrEmpty(b))
-                {
-                    return b.Length;
-                }
-                return 0;
+                throw new InvalidOperationException("You haven't searched for anything yet");
             }
-
-            if (string.IsNullOrEmpty(b))
+            else
             {
-                if (!string.IsNullOrEmpty(a))
-                {
-                    return a.Length;
-                }
-                return 0;
+                return searchResult;
             }
-
-            int cost;
-            int[,] d = new int[a.Length + 1, b.Length + 1];
-            int min1;
-            int min2;
-            int min3;
-
-            for (int i = 0; i <= d.GetUpperBound(0); i += 1)
-            {
-                d[i, 0] = i;
-            }
-
-            for (int i = 0; i <= d.GetUpperBound(1); i += 1)
-            {
-                d[0, i] = i;
-            }
-
-            for (int i = 1; i <= d.GetUpperBound(0); i += 1)
-            {
-                for (int j = 1; j <= d.GetUpperBound(1); j += 1)
-                {
-                    cost = (a[i - 1] != b[j - 1]) ? 1 : 0;
-
-                    min1 = d[i - 1, j] + 1;
-                    min2 = d[i, j - 1] + 1;
-                    min3 = d[i - 1, j - 1] + cost;
-                    d[i, j] = Math.Min(Math.Min(min1, min2), min3);
-                }
-            }
-
-            return d[d.GetUpperBound(0), d.GetUpperBound(1)];
-
         }
 
-        public static bool ContainsFuzzy(this string target, string searched)
-    {
-        // cheap stuff first
-        if (target == searched) return true;
-        if (target.Contains(searched)) return true;
-        if ((float)LevenshteinDistance(target, searched) / (float) target.Length < 0.3f) return true;
-        return false;
+        public abstract void Search(string phrase, SortTypeEnum sortType, Dictionary<string, string> filters);
     }
-}
 }

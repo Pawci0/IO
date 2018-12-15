@@ -8,29 +8,8 @@ using Database;
 
 namespace SearchEngine
 {
-    internal abstract class ProductSearch : ISearch<Product> 
+    internal abstract class ProductSearch : SearchBase<Product>
     {
-        protected List<Product> searchResult;
-        protected DBManager dataContext = new DBManager();
-
-        public IEnumerable<Product> GetSearchResults()
-        {
-            if(searchResult == null)
-            {
-                throw new InvalidOperationException("You haven't searched for anything yet");
-            }
-            else
-            {
-                return searchResult;
-            }
-        }
-
-        public abstract void Search(string phrase, SortTypeEnum sortType, Dictionary<string, string> filters);
-
-        protected void Query()
-        {
-
-        }
 
         protected IEnumerable<Product> OrderBy(IEnumerable<Product> input, SortTypeEnum sortType)
         {
