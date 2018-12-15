@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static SearchEngine.Search;
+using SearchEngine.Model;
+using static SearchEngine.SearchUtils;
 
 namespace SearchEngine
 {
@@ -26,6 +27,21 @@ namespace SearchEngine
         public void LevenshteinTest()
         { 
             Assert.AreEqual(6, LevenshteinDistance("element", "kot"));
+        }
+
+        [TestMethod]
+        public void SearchClassTest()
+        {
+            Search engine = new Search();
+            List<User> list = new List<User>
+            {
+                new User("Jan"), new User("Janusz"), new User("Abelard")
+            };
+            engine.Users = list;
+            var result = engine.SearchSomething("Ja", ESortType.Ascending, 1);
+
+            Assert.AreEqual(result.ToList().First(), "Jan");
+            Assert.AreEqual(result.ToList().Count(), 1);
         }
     }
 }

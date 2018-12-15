@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchEngine
 {
-    public static class Search
+    public static class SearchUtils
     {    
         /// <summary>
          /// Compute the distance between two strings.
