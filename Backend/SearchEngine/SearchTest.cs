@@ -32,13 +32,13 @@ namespace SearchEngine
         [TestMethod]
         public void SearchClassTest()
         {
-            Search engine = new Search();
+            UserSearch engine = new UserSearch();
             List<User> list = new List<User>
             {
                 new User("Jan"), new User("Janusz"), new User("Abelard")
             };
             engine.Users = list;
-            var result = engine.SearchSomething("Ja", ESortType.Ascending, 1);
+            var result = engine.Search("Ja", ESortType.Ascending, 1);
 
             Assert.AreEqual(result.ToList().First(), "Jan");
             Assert.AreEqual(result.ToList().Count(), 1);
