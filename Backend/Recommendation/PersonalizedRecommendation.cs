@@ -47,6 +47,7 @@ namespace Recommendation
                 var temp = (from Product product in allProducts
                            where product.Category_Id.Equals(item.Category_Id)
                            select product).OrderBy(product => product.Ratings.Sum(rating => rating.Value)/product.Ratings.Count).First();
+                allProducts.Remove(temp);
                 ret.Add(temp);
             }
             return ret;
