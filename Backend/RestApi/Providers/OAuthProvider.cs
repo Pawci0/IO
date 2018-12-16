@@ -26,8 +26,10 @@ namespace RestApi.Providers
         {
             return Task.Factory.StartNew(() =>
             {
+                UserService userService = new UserService();
+                
                 string username = context.UserName;
-                string password = context.Password;
+                string password = userService.GetHashedPassword(context.UserName, context.Password);
                 UserDto userDto = new UserDto
                 {
                     Username = username,
@@ -37,7 +39,7 @@ namespace RestApi.Providers
                 SecurityService securityService = new SecurityService();
                 if (securityService.AuthenticateUser(userDto))
                 {
-                    UserService userService = new UserService();
+                    
                     UserDto user = userService.GetUser(username);
 
                     List<Claim> claims = new List<Claim>

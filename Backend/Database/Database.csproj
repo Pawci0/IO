@@ -94,6 +94,7 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <None Include="Catalog.edmx.diagram">
       <DependentUpon>Catalog.edmx</DependentUpon>
       <SubType>Designer</SubType>

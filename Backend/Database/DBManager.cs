@@ -44,6 +44,16 @@ namespace Database
                     select user).FirstOrDefault();
             }
         }
+        
+        public User GetUserByEmail(string email)
+        {
+            using (var ctx = new katalogrzeczyEntities())
+            {
+                return (from User user in ctx.Users
+                    where user.Email == email
+                    select user).FirstOrDefault();
+            }
+        }
 
         public void DeleteUserById(int id)
         {
