@@ -128,6 +128,7 @@
     <Compile Include="Extensions\OwinContextExtensions.cs" />
     <Compile Include="Filters\ExceptionLoggingFilter.cs" />
     <Compile Include="Filters\UserValidationFilter.cs" />
+    <Compile Include="Filters\ValidateModelAttribute.cs" />
     <Compile Include="Handlers\RequestsLoggingHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\OAuthProvider.cs" />
