@@ -26,5 +26,13 @@ namespace Product
             this.userId = userId;
             this.description = description;
         }
+
+        public ProductDto(int productId, string name, int userId, string description)
+        {
+            this.productId = productId;
+            this.name = name;
+            this.userId = userId;
+            this.description = description;
+        }
     }
 }
