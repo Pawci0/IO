@@ -11,7 +11,7 @@ namespace SearchEngine
     internal abstract class SearchBase<T> : ISearch<T> where T : class
     {
         protected List<T> searchResult;
-        protected DBManager dataContext = new DBManager();
+        protected readonly DBManager dataContext = new DBManager();
 
 
         public IEnumerable<T> GetSearchResults()

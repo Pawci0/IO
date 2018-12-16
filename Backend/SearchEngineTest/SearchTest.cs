@@ -18,7 +18,7 @@ namespace SearchEngine
             var results = from value in myList
                 where value.ContainsFuzzy("kot")
                 select value;
-
+            
             Assert.AreEqual(1, results.Count());
         }
 
