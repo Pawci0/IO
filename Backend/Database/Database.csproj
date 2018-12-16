@@ -73,6 +73,7 @@
       <DependentUpon>Catalog.tt</DependentUpon>
     </Compile>
     <Compile Include="DBManager.cs" />
+    <Compile Include="IDBManager.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>Catalog.tt</DependentUpon>
     </Compile>
