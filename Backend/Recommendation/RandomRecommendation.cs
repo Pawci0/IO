@@ -6,8 +6,8 @@ namespace Recommendation
 {
     class RandomRecommendation : IRecommendation
     {
-        private readonly DBManager db;
-        public RandomRecommendation(DBManager db)
+        private readonly IDBManager db;
+        public RandomRecommendation(IDBManager db)
         {
             this.db = db;
         }

@@ -12,7 +12,7 @@ namespace Recommendation.Tests
         [TestMethod()]
         public void GetRecommendedProductsTest1()
         {
-            Mock<DBManager> mockDatabase = new Mock<DBManager>();
+            Mock<IDBManager> mockDatabase = new Mock<IDBManager>();
             List<Product> productList = new List<Product>
             {
                 new Product
@@ -38,7 +38,7 @@ namespace Recommendation.Tests
         [TestMethod()]
         public void GetRecommendedProductsTest2()
         {
-            Mock<DBManager> mockDatabase = new Mock<DBManager>();
+            Mock<IDBManager> mockDatabase = new Mock<IDBManager>();
             List<Product> productList = new List<Product>
             {
                 new Product
@@ -77,7 +77,7 @@ namespace Recommendation.Tests
         [TestMethod()]
         public void GetRecommendedProductsTest3()
         {
-            Mock<DBManager> mockDatabase = new Mock<DBManager>();
+            Mock<IDBManager> mockDatabase = new Mock<IDBManager>();
             List<Product> productList = new List<Product>
             {
                 new Product
@@ -170,7 +170,7 @@ namespace Recommendation.Tests
         [TestMethod()]
         public void GetRecommendedProductsTest4()
         {
-            Mock<DBManager> mockDatabase = new Mock<DBManager>();
+            Mock<IDBManager> mockDatabase = new Mock<IDBManager>();
             List<Product> productList = new List<Product>
             {
                 new Product
@@ -315,7 +315,7 @@ namespace Recommendation.Tests
         [TestMethod()]
         public void GetRecommendedProductsTest5()
         {
-            Mock<DBManager> mockDatabase = new Mock<DBManager>();
+            Mock<IDBManager> mockDatabase = new Mock<IDBManager>();
             List<Product> productList = new List<Product>
             {
                 new Product

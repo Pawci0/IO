@@ -6,13 +6,13 @@ namespace Recommendation
 {
     public class RecommendationEngine : IRecommendation
     {
-        private readonly DBManager db;
+        private readonly IDBManager db;
         public RecommendationEngine()
         {
             db = new DBManager();
         }
 
-        public RecommendationEngine(DBManager db)
+        public RecommendationEngine(IDBManager db)
         {
             this.db = db;
         }

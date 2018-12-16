@@ -7,9 +7,9 @@ namespace Recommendation
 {
     class PersonalizedRecommendation : IRecommendation
     {
-        private readonly DBManager db;
+        private readonly IDBManager db;
 
-        public PersonalizedRecommendation(DBManager db)
+        public PersonalizedRecommendation(IDBManager db)
         {
             this.db = db;
         }
