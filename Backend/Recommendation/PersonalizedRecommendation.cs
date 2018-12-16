@@ -17,7 +17,7 @@ namespace Recommendation
         public IEnumerable<Product> GetRecommendedProducts(int userId, int amount)
         {
             var ratings = GetUserRatings(userId);
-            var bestRatings = ratings.OrderBy(rating => rating.Value).Take(amount);
+            var bestRatings = ratings.OrderByDescending(rating => rating.Value).Take(amount);
             var bestRatedProducts = GetProductsFromRatings(bestRatings);
             return GetProductsFromBestCategories(bestRatedProducts, amount);
         }
@@ -47,7 +47,7 @@ namespace Recommendation
             {
                 var temp = (from Product product in allProducts
                            where product.Category_Id.Equals(item.Category_Id)
-                           select product).OrderBy(product => product.Ratings.Sum(rating => rating.Value)/product.Ratings.Count).FirstOrDefault();
+                           select product).OrderByDescending(product => product.Ratings.Sum(rating => rating.Value)/product.Ratings.Count).FirstOrDefault();
                 if (!temp.Equals(null))
                 {
                     allProducts.Remove(temp);
