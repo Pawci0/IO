@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Database
 {
-    interface IDBManager
+    public interface IDBManager
     {
         #region UserCUD
 
