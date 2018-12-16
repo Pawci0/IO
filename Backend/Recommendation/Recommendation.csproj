@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="PersonalizedRecommendation.cs" />
+    <Compile Include="RandomRecommendation.cs" />
     <Compile Include="RecommendationEngine.cs" />
     <Compile Include="IRecommendation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
