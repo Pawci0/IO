@@ -12,6 +12,11 @@ namespace Recommendation
             db = new DBManager();
         }
 
+        public RecommendationEngine(DBManager db)
+        {
+            this.db = db;
+        }
+
         public IEnumerable<Product> GetRecommendedProducts(int userId, int amount)
         {
             return SelectEngine(userId).GetRecommendedProducts(userId, amount);
