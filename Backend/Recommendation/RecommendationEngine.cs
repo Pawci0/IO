@@ -1,5 +1,6 @@
 ﻿using Database;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Recommendation
 {
@@ -13,12 +14,15 @@ namespace Recommendation
 
         public IEnumerable<Product> GetRecommendedProducts(int userId, int amount)
         {
-            return SelectEngine().GetRecommendedProducts(userId, amount);
+            return SelectEngine(userId).GetRecommendedProducts(userId, amount);
         }
 
-        private IRecommendation SelectEngine()
+        private IRecommendation SelectEngine(int userId)
         {            
             var ratings = db.GetAllRatings();
+            ratings = (from Rating rating in ratings
+                      where rating.User_id.Equals(userId)
+                      select rating).ToList();
             return ratings.Count > 0 ? (IRecommendation)new PersonalizedRecommendation(db) : new RandomRecommendation(db);
         }
     }
