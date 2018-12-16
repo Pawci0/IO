@@ -4,19 +4,19 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="catalogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="catalogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Category_Id" />
           </Key>
-          <Property Name="Category_Id" Type="int" Nullable="false" />
+          <Property Name="Category_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Product_Id" />
           </Key>
-          <Property Name="Product_Id" Type="int" Nullable="false" />
+          <Property Name="Product_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Category_Id" Type="int" />
           <Property Name="User_Id" Type="int" Nullable="false" />
@@ -36,7 +36,7 @@ warning 6002: The table/view 'katalogRzeczy.dbo.ProductTag' does not have a prim
           <Key>
             <PropertyRef Name="Rating_Id" />
           </Key>
-          <Property Name="Rating_Id" Type="int" Nullable="false" />
+          <Property Name="Rating_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Product_Id" Type="int" Nullable="false" />
           <Property Name="User_id" Type="int" Nullable="false" />
           <Property Name="Value" Type="int" Nullable="false" />
@@ -46,14 +46,14 @@ warning 6002: The table/view 'katalogRzeczy.dbo.ProductTag' does not have a prim
           <Key>
             <PropertyRef Name="Tag_Id" />
           </Key>
-          <Property Name="Tag_Id" Type="int" Nullable="false" />
+          <Property Name="Tag_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="User_Id" />
           </Key>
-          <Property Name="User_Id" Type="int" Nullable="false" />
+          <Property Name="User_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
@@ -197,8 +197,7 @@ warning 6002: The table/view 'katalogRzeczy.sys.database_firewall_rules' does no
             <End Role="Rating" EntitySet="Rating" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="catalogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
