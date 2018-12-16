@@ -67,7 +67,7 @@ namespace Recommendation
                     }
                     else
                     {
-                        ret.Add(null);
+                        break;
                     }
                 } while (ret.Count < target);
             }

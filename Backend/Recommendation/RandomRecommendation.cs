@@ -14,12 +14,7 @@ namespace Recommendation
 
         public IEnumerable<Product> GetRecommendedProducts(int userId, int amount)
         {
-            var ret = db.GetAllProducts().Shuffle().Take(amount).ToList();
-            while(ret.Count < amount)
-            {
-                ret.Add(null);
-            }
-            return ret;
+            return db.GetAllProducts().Shuffle().Take(amount);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Recommendation.Tests
             mockDatabase.Setup(X => X.GetAllProducts()).Returns(productList);
             var engine = new RecommendationEngine(mockDatabase.Object);
             var result = engine.GetRecommendedProducts(1, 5);
-            Assert.AreEqual(5, result.Count());
+            Assert.AreEqual(3, result.Count());
         }
 
         [TestMethod()]
@@ -164,7 +164,7 @@ namespace Recommendation.Tests
                                                                                             select prod).First());
             var engine = new RecommendationEngine(mockDatabase.Object);
             var result = engine.GetRecommendedProducts(1, 5);
-            Assert.AreEqual(5, result.Count());
+            Assert.AreEqual(4, result.Count());
         }
 
         [TestMethod()]
