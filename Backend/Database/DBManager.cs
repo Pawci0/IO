@@ -42,6 +42,7 @@ namespace Database
                 User user = GetUserById(id);
                 if (user != null)
                 {
+                    ctx.Users.Attach(user);
                     ctx.Users.Remove(user);
                     ctx.SaveChanges();
                 }
@@ -60,6 +61,7 @@ namespace Database
                 User user = GetUserById(id);
                 if(user != null)
                 {
+                    ctx.Users.Attach(user);
                     user.Username = username ?? user.Username;
                     user.Password = password ?? user.Password;
                     user.Email = email ?? user.Email;
@@ -78,7 +80,6 @@ namespace Database
             }
         }
         #endregion
-
 
         #region ProductCUD
 
@@ -114,6 +115,7 @@ namespace Database
                 Product product = GetProductById(id);
                 if (product != null)
                 {
+                    ctx.Products.Attach(product);
                     ctx.Products.Remove(product);
                     ctx.SaveChanges();
                 }
@@ -131,6 +133,7 @@ namespace Database
                 Product product = GetProductById(id);
                 if (product != null)
                 {
+                    ctx.Products.Attach(product);
                     product.Name = name ?? product.Name;
                     product.Description = description ?? product.Description;
 
@@ -187,6 +190,7 @@ namespace Database
                 Tag tag = GetTagById(id);
                 if (tag != null)
                 {
+                    ctx.Tags.Attach(tag);
                     ctx.Tags.Remove(tag);
                     ctx.SaveChanges();
                 }
@@ -201,6 +205,7 @@ namespace Database
                 Tag tag = GetTagById(id);
                 if (tag != null)
                 {
+                    ctx.Tags.Attach(tag);
                     tag.Name = name ?? tag.Name;
 
                     ctx.SaveChanges();
@@ -250,6 +255,7 @@ namespace Database
                 Category category = GetCategoryById(id);
                 if (category != null)
                 {
+                    ctx.Categories.Attach(category);
                     ctx.Categories.Remove(category);
                     ctx.SaveChanges();
                 }
@@ -264,6 +270,7 @@ namespace Database
                 Category category = GetCategoryById(id);
                 if (category != null)
                 {
+                    ctx.Categories.Attach(category);
                     category.Name = name ?? category.Name;
 
                     ctx.SaveChanges();
@@ -315,6 +322,7 @@ namespace Database
                 Rating rating = GetRatingById(id);
                 if (rating != null)
                 {
+                    ctx.Ratings.Attach(rating);
                     ctx.Ratings.Remove(rating);
                     ctx.SaveChanges();
                 }
@@ -332,6 +340,7 @@ namespace Database
                 Rating rating = GetRatingById(id);
                 if (rating != null)
                 {
+                    ctx.Ratings.Attach(rating);
                     rating.Comment = comment ?? rating.Comment;
 
                     if (productId != 0)
