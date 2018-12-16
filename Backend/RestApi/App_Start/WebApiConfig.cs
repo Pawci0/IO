@@ -3,6 +3,7 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using Newtonsoft.Json.Serialization;
 using RestApi.Filters;
+using RestApi.Handlers;
 
 namespace RestApi
 {
@@ -20,6 +21,9 @@ namespace RestApi
             
             config.Filters.Add(new AuthorizeAttribute());
             config.Filters.Add(new UserValidationFilter());
+            config.Filters.Add(new ExceptionLoggingFilter());
+            
+            config.MessageHandlers.Add(new RequestsLoggingHandler());
             
             JsonMediaTypeFormatter jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
