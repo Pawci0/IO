@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SearchEngine.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,13 +66,25 @@ namespace SearchEngine
 
         }
 
-        public static bool ContainsFuzzy(this string target, string searched)
-    {
-        // cheap stuff first
-        if (target == searched) return true;
-        if (target.Contains(searched)) return true;
-        if ((float)LevenshteinDistance(target, searched) / (float) target.Length < 0.3f) return true;
-        return false;
+        public static bool ContainsFuzzy(this string target, string searched, out float score)
+        {
+            score = 0;
+            // cheap stuff first
+            if (target == searched) return true;
+            if (target.Contains(searched)) return true;
+            score = (float)LevenshteinDistance(target, searched) / (float)target.Length;
+            if (score < 0.3f) return true;
+            return false;
+        }
+
+        public static IEnumerable<ISearch<ISearchItemDTO>> GetAllSearchEngines()
+        {
+            return new ISearch<ISearchItemDTO>[] 
+            { new ProductNameSearch() as ISearch<ISearchItemDTO>,
+                new TagSearch() as ISearch<ISearchItemDTO>,
+                new RatingSearch() as ISearch<ISearchItemDTO>,
+                new UserFullnameSearch() as ISearch<ISearchItemDTO>,
+                new UserUsernameSearch() as ISearch<ISearchItemDTO> };
+        }
     }
-}
 }

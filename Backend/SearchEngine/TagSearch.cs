@@ -1,4 +1,5 @@
 ﻿using Database;
+using SearchEngine.DTO;
 using SearchEngine.Enums;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,11 @@ namespace SearchEngine
     {
         public override void Search(string phrase, SortTypeEnum sortType, Dictionary<string, string> filters)
         {
-            IEnumerable<Product> results = from Product product in dataContext.GetAllProducts()
+            float score = 0;
+            IEnumerable<ProductDTO> results = from Product product in dataContext.GetAllProducts()
                                            from Tag tag in product.Tags
-                                           where tag.Name.ContainsFuzzy(phrase)
-                                           select product;
+                                           where tag.Name.ContainsFuzzy(phrase, out score)
+                                           select new ProductDTO(product, score);
 
             if (searchResult is null)
             {

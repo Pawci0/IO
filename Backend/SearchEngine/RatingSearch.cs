@@ -1,10 +1,9 @@
 ﻿using Database;
+using SearchEngine.DTO;
 using SearchEngine.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SearchEngine
 {
@@ -13,9 +12,10 @@ namespace SearchEngine
 
         public override void Search(string phrase, SortTypeEnum sortType, Dictionary<string, string> filters)
         {
-            IEnumerable<Product> results = from Product product in dataContext.GetAllProducts()
-                                           where AverageRatings(product.Ratings).ToString().ContainsFuzzy(phrase)
-                                           select product;
+            float score = 0;
+            IEnumerable<ProductDTO> results = from Product product in dataContext.GetAllProducts()
+                                           where AverageRatings(product.Ratings).ToString().ContainsFuzzy(phrase, out score)
+                                           select new ProductDTO(product, score);
 
             if (searchResult is null)
             {
@@ -27,7 +27,7 @@ namespace SearchEngine
             }
         }
 
-        private double AverageRatings(ICollection < Database.Rating > ratings)
+        private double AverageRatings(ICollection<Database.Rating> ratings)
         {
             double avg = 0;
             foreach (var value in ratings)
@@ -35,7 +35,7 @@ namespace SearchEngine
                 avg += value.Value;
             }
 
-            return Math.Round(avg/ratings.Count, 2);
+            return Math.Round(avg / ratings.Count, 2);
         }
 
     }

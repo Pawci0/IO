@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Database;
+using SearchEngine.DTO;
 using SearchEngine.Enums;
 
 namespace SearchEngine
@@ -9,9 +10,10 @@ namespace SearchEngine
     {
         public override void Search(string phrase, SortTypeEnum sortType, Dictionary<string, string> filters)
         {
-            IEnumerable<User> results = from User user in dataContext.GetAllUsers()
-                where (user.Name + " " + user.Surname).ContainsFuzzy(phrase)
-                select user;
+            float score = 0;
+            IEnumerable<UserDTO> results = from User user in dataContext.GetAllUsers()
+                                            where (user.Name + " " + user.Surname).ContainsFuzzy(phrase, out score)
+                                            select new UserDTO(user, score);
 
             if (searchResult is null)
             {

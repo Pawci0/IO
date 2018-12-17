@@ -14,10 +14,10 @@ namespace SearchEngine
         public void FuzzySearchTest()
         {
             var myList = new List<string>{"ala ma kota", "element"};
-
+            float score = 0;
             var results = from value in myList
-                where value.ContainsFuzzy("kot")
-                select value;
+                          where value.ContainsFuzzy("kot", out score)
+                          select value;
             
             Assert.AreEqual(1, results.Count());
         }
