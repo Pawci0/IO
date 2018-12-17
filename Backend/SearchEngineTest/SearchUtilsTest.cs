@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SearchEngine.DTO;
 using static SearchEngine.SearchUtils;
 
 namespace SearchEngine
 {
     [TestClass]
-    public class SearchTest
+    public class SearchUtilsTest
     {
         [TestMethod]
         public void FuzzySearchTest()
@@ -26,6 +27,17 @@ namespace SearchEngine
         public void LevenshteinTest()
         { 
             Assert.AreEqual(6, LevenshteinDistance("element", "kot"));
+        }
+
+        [TestMethod]
+        public void GetAllSearchEnginesTest()
+        {
+            IEnumerable<ISearch<ISearchItemDTO>> engines = SearchUtils.GetAllSearchEngines();
+            Assert.AreEqual(5, engines.Count());
+            foreach(ISearch<ISearchItemDTO> engine in engines)
+            {
+                Assert.IsNotNull(engine);
+            }
         }
     }
 }

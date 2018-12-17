@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using System.Web.Http;
 using SearchEngine;
 using SearchEngine.DTO;
@@ -10,9 +10,7 @@ using SearchEngine.Enums;
 
 namespace SearchEngineAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SearchController : ControllerBase
+    public class SearchController : ApiController
     {
         private ICollection<ISearch<ISearchItemDTO>> searchEngines;
 
@@ -30,7 +28,7 @@ namespace SearchEngineAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/getsearchresults/{pageIndex}/{pageSize}")]
-        public ActionResult<IEnumerable<ISearchItemDTO>> GetSearchResult(int pageIndex, int pageSize)
+        public IEnumerable<ISearchItemDTO> GetSearchResult(int pageIndex, int pageSize)
         {
             IEnumerable<ISearchItemDTO> result = new ISearchItemDTO[] { };
 
@@ -70,25 +68,24 @@ namespace SearchEngineAPI.Controllers
             }
             catch(ArgumentOutOfRangeException)
             {
-                return new StatusCodeResult(416);
+                throw new HttpResponseException(HttpStatusCode.RequestedRangeNotSatisfiable);
             }
             catch(InvalidOperationException)
             {
-                return new StatusCodeResult(400);
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
-            return new ActionResult<IEnumerable<ISearchItemDTO>>(result);
+            return result;
         }
 
         [HttpGet]
         [Route("api/search/{phrase}/{sortType}")]
-        public EmptyResult Search(string phrase, string sortType)
+        public void Search(string phrase, string sortType)
         {
             SortTypeEnum sortTypeEnum = (SortTypeEnum)Enum.Parse(typeof(SortTypeEnum), sortType);
             foreach (var searchEngine in searchEngines)
             {
                 searchEngine.Search(phrase, sortTypeEnum, null);
             }
-            return new EmptyResult();
         }
     }
 }

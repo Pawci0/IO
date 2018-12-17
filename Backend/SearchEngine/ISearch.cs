@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace SearchEngine
 {
     [ServiceContract]
-    public interface ISearch<T> where T : ISearchItemDTO
+    public interface ISearch<out T> where T : ISearchItemDTO
     {
         [OperationContract]
         void Search(string phrase, SortTypeEnum sortType, Dictionary<string, string> filters);
