@@ -80,7 +80,7 @@ namespace SearchEngineAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/search/{phrase}/{pageSize}")]
+        [Route("api/search/{phrase}/{sortType}")]
         public EmptyResult Search(string phrase, string sortType)
         {
             SortTypeEnum sortTypeEnum = (SortTypeEnum)Enum.Parse(typeof(SortTypeEnum), sortType);
