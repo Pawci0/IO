@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using SearchEngine;
@@ -30,6 +31,11 @@ namespace SearchEngineAPI.Controllers
         [Route("api/getsearchresults/{pageIndex}/{pageSize}")]
         public IEnumerable<ISearchItemDTO> GetSearchResult(int pageIndex, int pageSize)
         {
+            if(pageIndex <= 0 || pageSize <= 0)
+            {
+                throw new HttpResponseException(HttpStatusCode.RequestedRangeNotSatisfiable);
+            }
+
             IEnumerable<ISearchItemDTO> result = new ISearchItemDTO[] { };
 
             int amountOfElementsToTake = (pageSize / searchEngines.Count()) + 1;
@@ -81,10 +87,19 @@ namespace SearchEngineAPI.Controllers
         [Route("api/search/{phrase}/{sortType}")]
         public void Search(string phrase, string sortType)
         {
-            SortTypeEnum sortTypeEnum = (SortTypeEnum)Enum.Parse(typeof(SortTypeEnum), sortType);
-            foreach (var searchEngine in searchEngines)
+            try
             {
-                searchEngine.Search(phrase, sortTypeEnum, null);
+                SortTypeEnum sortTypeEnum = (SortTypeEnum)Enum.Parse(typeof(SortTypeEnum), sortType);
+                foreach (var searchEngine in searchEngines)
+                {
+                    searchEngine.Search(phrase, sortTypeEnum, null);
+                }
+            }
+            catch(ArgumentException)
+            {
+                HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                message.Content = new StringContent("Unknown Sorting type; known sorting types are: ascending, descending and ignore");
+                throw new HttpResponseException(message);
             }
         }
     }

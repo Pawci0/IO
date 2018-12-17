@@ -17,7 +17,7 @@ namespace SearchEngine
 
         public IEnumerable<T> GetSearchResults(int skip, int take)
         {
-            if(take <= 0)
+            if(take < 0)
             {
                 throw new ArgumentOutOfRangeException("pageSize can't be lower or equal to zero", nameof(take));
             }
