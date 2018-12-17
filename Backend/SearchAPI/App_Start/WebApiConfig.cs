@@ -16,7 +16,7 @@ namespace SearchAPI
 
             config.Routes.MapHttpRoute(
                 name: "SearchEngineApi",
-                routeTemplate: "api/{controller}",
+                routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }
