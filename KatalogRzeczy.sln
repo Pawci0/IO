@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchEngineTest", "Backend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAPI", "Backend\SearchAPI\SearchAPI.csproj", "{2E01C8AA-E6F4-4F3B-A945-2CE3EDCC1DEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseTests1", "Backend\DatabaseTests1\DatabaseTests1.csproj", "{A8BBA638-E9FF-4C84-B1B1-CBC983293B2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{2E01C8AA-E6F4-4F3B-A945-2CE3EDCC1DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E01C8AA-E6F4-4F3B-A945-2CE3EDCC1DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E01C8AA-E6F4-4F3B-A945-2CE3EDCC1DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8BBA638-E9FF-4C84-B1B1-CBC983293B2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BBA638-E9FF-4C84-B1B1-CBC983293B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8BBA638-E9FF-4C84-B1B1-CBC983293B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BBA638-E9FF-4C84-B1B1-CBC983293B2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

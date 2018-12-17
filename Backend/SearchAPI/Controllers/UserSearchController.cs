@@ -9,27 +9,24 @@ using System.Web.Http;
 
 namespace SearchEngineAPI.Controllers
 {
-    public class SearchController : ApiController
+    public class UserSearchController : ApiController
     {
-        private readonly ICollection<ISearch<ISearchItemDTO>> searchEngines;
+        private readonly ICollection<ISearch<UserDTO>> searchEngines;
 
-        public SearchController()
+        public UserSearchController()
         {
-            searchEngines = new ISearch<ISearchItemDTO>[] {
-                new ProductNameSearch(),
-                new TagSearch(),
-                new RatingSearch(),
+            searchEngines = new ISearch<UserDTO>[] 
+            {
                 new UserFullnameSearch(),
                 new UserUsernameSearch()
-            }
-            ;
+            };
         }
 
         [HttpGet]
-        [Route("api/search/{phrase}/{sortType}/{pageIndex}/{pageSize}")]
+        [Route("api/usersearch/{phrase}/{sortType}/{pageIndex}/{pageSize}")]
         public IEnumerable<ISearchItemDTO>Search(string phrase, string sortType, int pageIndex, int pageSize)
         {
-            var result = new List<ISearchItemDTO>();
+            var result = new List<UserDTO>();
             try
             {
                 var sortTypeEnum = (SortTypeEnum)Enum.Parse(typeof(SortTypeEnum), sortType);
