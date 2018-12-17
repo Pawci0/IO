@@ -1,28 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import SearchContainer from './components/front1/containers/SearchContainer';
+import ProductViewContainer from './components/front1/containers/ProductViewContainer';
+import { Provider } from 'react-redux';
+import PropTypes from 'prop-types';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+const App = ({ store }) => (
+  <Provider store={store}>
+    <Router>
+      <div>
+        <Route exact path="/" component={SearchContainer} />
+        <Route path="/search" component={SearchContainer} />
+        <Route path="/product" component={ProductViewContainer} />
       </div>
-    );
-  }
+    </Router>
+  </Provider>
+);
+
+App.propTypes = {
+  store: PropTypes.object.isRequired
 }
 
 export default App;
