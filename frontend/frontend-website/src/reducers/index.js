@@ -5,6 +5,6 @@ import SearchReducer, * as fromSearch from './SearchReducer';
 export const getMyTest = (state) => fromSearch.getTest(state);
 
 export default combineReducers({
-    ProductReducer,
-    SearchReducer,
+    product: ProductReducer,
+    search: SearchReducer,
 })

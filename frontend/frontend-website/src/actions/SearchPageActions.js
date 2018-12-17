@@ -1,5 +1,24 @@
-export const init = () => (dispatch) => {
-    dispatch({
-      type: 'INIT'
-    })
-  }
+import { SEARCH_GET_PRODUCTS } from './actions';
+
+const searchGetProductsAction = (products) => ({ type: SEARCH_GET_PRODUCTS, data: products })
+
+export const getProducts = (/*kryteria*/) => dispatch => {
+    // request response TODO
+    // data mocking for now
+    console.log('action dispatched');
+    const payload = {
+        products: [
+            {
+                id: '1',
+                name: 'wiertarka',
+            },
+            {
+                id: '2',
+                name: 'suszarka',
+            }
+        ]
+    };
+
+    dispatch(searchGetProductsAction(payload.products));
+}
+
