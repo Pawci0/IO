@@ -1,106 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-using SearchEngine;
+﻿using SearchEngine;
 using SearchEngine.DTO;
 using SearchEngine.Enums;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 
 namespace SearchEngineAPI.Controllers
 {
     public class SearchController : ApiController
     {
-        private ICollection<ISearch<ISearchItemDTO>> searchEngines;
+        private readonly ICollection<ISearch<ISearchItemDTO>> searchEngines;
 
         public SearchController()
         {
-            searchEngines = SearchUtils.GetAllSearchEngines().ToList();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pageIndex"> Page index, starting with 1 </param>
-        /// <param name="pageSize"> Number of items displayed on each page </param>
-        /// </param>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("api/getsearchresults/{pageIndex}/{pageSize}")]
-        public IEnumerable<ISearchItemDTO> GetSearchResult(int pageIndex, int pageSize)
-        {
-            if(pageIndex <= 0 || pageSize <= 0)
-            {
-                throw new HttpResponseException(HttpStatusCode.RequestedRangeNotSatisfiable);
+            searchEngines = new ISearch<ISearchItemDTO>[] {
+                new ProductNameSearch(),
+                new TagSearch(),
+                new RatingSearch(),
+                new UserFullnameSearch(),
+                new UserUsernameSearch()
             }
-
-            IEnumerable<ISearchItemDTO> result = new ISearchItemDTO[] { };
-
-            int amountOfElementsToTake = (pageSize / searchEngines.Count()) + 1;
-            int amountOfEnginesToTakeWholeSubset = pageSize / searchEngines.Count();
-            int firstEngine = (pageSize % searchEngines.Count()) * (pageIndex - 1);
-
-            int baseSkip = pageSize * (int)((pageIndex - 1) / searchEngines.Count());
-            int full = (pageIndex - 1) % searchEngines.Count;
-
-            int[] skips = Enumerable.Repeat(baseSkip, searchEngines.Count).ToArray();
-            int skipsIt = 0;
-            while (full != 0)
-            {
-                ++skips[skipsIt];
-                skipsIt = ++skipsIt % skips.Count();
-                --full;
-            }
-
-            try
-            {
-                int it = firstEngine, wholeSubsetIt = 0;
-                do
-                {
-                    if (wholeSubsetIt < amountOfEnginesToTakeWholeSubset)
-                    {
-                        result = result.Concat(searchEngines.ElementAt(it).GetSearchResults(skips[it], amountOfElementsToTake));
-                    }
-                    else
-                    {
-                        result = result.Concat(searchEngines.ElementAt(it).GetSearchResults(skips[it], amountOfElementsToTake - 1));
-                    }
-
-                    it = ++it % searchEngines.Count();
-                }
-                while (it != firstEngine);
-            }
-            catch(ArgumentOutOfRangeException)
-            {
-                throw new HttpResponseException(HttpStatusCode.RequestedRangeNotSatisfiable);
-            }
-            catch(InvalidOperationException)
-            {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
-            }
-            return result;
+            ;
         }
 
         [HttpGet]
-        [Route("api/search/{phrase}/{sortType}")]
-        public void Search(string phrase, string sortType)
+        [Route("api/search/{phrase}/{sortType}/{pageIndex}/{pageSize}")]
+        public IEnumerable<ISearchItemDTO>Search(string phrase, string sortType, int pageIndex, int pageSize)
         {
+            var result = new List<ISearchItemDTO>();
             try
             {
-                SortTypeEnum sortTypeEnum = (SortTypeEnum)Enum.Parse(typeof(SortTypeEnum), sortType);
+                var sortTypeEnum = (SortTypeEnum)Enum.Parse(typeof(SortTypeEnum), sortType);
                 foreach (var searchEngine in searchEngines)
                 {
                     searchEngine.Search(phrase, sortTypeEnum, null);
+                    var tmp = searchEngine.GetSearchResults(pageIndex - 1, pageSize);
+                    if (tmp != null)
+                    {
+                        result.AddRange(tmp);
+                    }
                 }
             }
-            catch(ArgumentException)
+            catch(Exception exception)
             {
-                HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.BadRequest);
-                message.Content = new StringContent("Unknown Sorting type; known sorting types are: ascending, descending and ignore");
+                var message = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent(exception.Message)
+                };
                 throw new HttpResponseException(message);
             }
+
+            return result;
         }
     }
 }

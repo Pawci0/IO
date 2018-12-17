@@ -2,7 +2,7 @@
 
 namespace SearchEngine
 {
-    internal abstract class ProductSearch : SearchBase<ProductDTO>
+    public abstract class ProductSearch : SearchBase<ProductDTO>
     {
     }
 }

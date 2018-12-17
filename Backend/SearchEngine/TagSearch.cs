@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SearchEngine
 {
-    internal class TagSearch : ProductSearch
+    public class TagSearch : ProductSearch
     {
         public override void Search(string phrase, SortTypeEnum sortType, Dictionary<string, string> filters)
         {

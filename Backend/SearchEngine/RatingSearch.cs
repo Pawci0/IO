@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace SearchEngine
 {
-    internal class RatingSearch : ProductSearch
+    public class RatingSearch : ProductSearch
     {
 
         public override void Search(string phrase, SortTypeEnum sortType, Dictionary<string, string> filters)

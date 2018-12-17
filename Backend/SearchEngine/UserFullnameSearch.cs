@@ -6,7 +6,7 @@ using SearchEngine.Enums;
 
 namespace SearchEngine
 {
-    internal class UserFullnameSearch : UserSearch
+    public class UserFullnameSearch : UserSearch
     {
         public override void Search(string phrase, SortTypeEnum sortType, Dictionary<string, string> filters)
         {

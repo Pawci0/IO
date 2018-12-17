@@ -12,9 +12,10 @@ namespace SearchEngine
         /// <summary>
         /// Compute the distance between two strings.
         /// </summary>
-        public static int LevenshteinDistance(string a, string b)
+        public static int LevenshteinDistance(string first, string other)
         {
-
+            string a = first.ToLower();
+            string b = other.ToLower();
             if (string.IsNullOrEmpty(a))
             {
                 if (!string.IsNullOrEmpty(b))

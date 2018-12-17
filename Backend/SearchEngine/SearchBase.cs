@@ -9,9 +9,9 @@ using SearchEngine.Enums;
 
 namespace SearchEngine
 {
-    internal abstract class SearchBase<T> : ISearch<T> where T : ISearchItemDTO
+    public abstract class SearchBase<T> : ISearch<T> where T : ISearchItemDTO
     {
-        protected List<T> searchResult;
+        protected List<T> searchResult = new List<T>();
         protected readonly DBManager dataContext = new DBManager();
 
 
@@ -21,18 +21,14 @@ namespace SearchEngine
             {
                 throw new ArgumentOutOfRangeException("pageSize can't be lower or equal to zero", nameof(take));
             }
-            else if (skip < 0)
+
+            if (skip < 0)
             {
                 throw new ArgumentOutOfRangeException("pageNumber can't be lower than zero", nameof(skip));
             }
-            else if (searchResult == null)
-            {
-                throw new InvalidOperationException("You haven't searched for anything yet");
-            }
-            else
-            {
-                return searchResult.Skip(take * (skip)).Take(take);
-            }
+            
+
+            return skip == 0 ? searchResult.Take(take) : searchResult.Skip(take * (skip)).Take(take);
         }
 
         public abstract void Search(string phrase, SortTypeEnum sortType, Dictionary<string, string> filters);
