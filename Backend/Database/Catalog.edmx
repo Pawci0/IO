@@ -59,6 +59,7 @@ warning 6002: The table/view 'katalogRzeczy.dbo.ProductTag' does not have a prim
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Surname" Type="nchar" MaxLength="10" />
+          <Property Name="isEnabled" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'katalogRzeczy.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -255,6 +256,7 @@ warning 6002: The table/view 'katalogRzeczy.sys.database_firewall_rules' does no
           <Property Name="Surname" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_User" FromRole="User" ToRole="Product" />
           <NavigationProperty Name="Ratings" Relationship="Self.FK_Rating_User" FromRole="User" ToRole="Rating" />
+          <Property Name="isEnabled" Type="Boolean" />
         </EntityType>
         <EntityType Name="database_firewall_rules">
           <Key>
@@ -399,6 +401,7 @@ warning 6002: The table/view 'katalogRzeczy.sys.database_firewall_rules' does no
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="catalogModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
                 <ScalarProperty Name="User_Id" ColumnName="User_Id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

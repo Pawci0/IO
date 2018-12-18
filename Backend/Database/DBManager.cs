@@ -19,7 +19,8 @@ namespace Database
                     Password = password,
                     Email = email,
                     Name = name,
-                    Surname = surname
+                    Surname = surname,
+                    isEnabled = true
                 });
                 ctx.SaveChanges();
             }

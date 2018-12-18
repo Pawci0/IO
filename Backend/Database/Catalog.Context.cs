@@ -15,17 +15,6 @@ namespace Database
     
     public partial class katalogrzeczyEntities : DbContext
     {
-        private katalogrzeczyEntities instance;
-
-        public katalogrzeczyEntities GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new katalogrzeczyEntities();
-            }
-            return instance;
-        }
-
         public katalogrzeczyEntities()
             : base("name=katalogrzeczyEntities")
         {
