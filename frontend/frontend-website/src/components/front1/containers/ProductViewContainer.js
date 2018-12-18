@@ -20,7 +20,7 @@ class ProductViewContainer extends Component {
         <p>{`id: ${id}`}</p>
         {this.props.product &&
         <div>
-          <p>{`nazwa: ${this.props.product.Name}`}</p>
+          <h1>{`nazwa: ${this.props.product.Name}`}</h1>
           <p>{`Ocena: ${this.props.product.Score}`}</p>
           <p>{`kategoria: ${this.props.product.Category_Name}`}</p>
           <p>{`Dodane przez: ${this.props.product.User_Username}`}</p>
