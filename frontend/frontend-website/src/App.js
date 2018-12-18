@@ -6,14 +6,16 @@ import ProductViewContainer from './components/front1/containers/ProductViewCont
 import {Provider} from 'react-redux';
 import PropTypes from 'prop-types';
 import {LoginPageContainer} from "./components/front2/containers/LoginPageContainer";
+import {RegisterViewContainer} from "./components/front2/containers/RegisterViewContainer";
 
 const App = ({store}) => (
     <Provider store={store}>
         <Router>
             <div>
-                <Route exact path="/" component={LoginPageContainer}/>
+                <Route exact path="/login" component={LoginPageContainer}/>
                 <Route path="/search" component={SearchContainer}/>
                 <Route path="/product" component={ProductViewContainer}/>
+                <Route path="/register" component={RegisterViewContainer}/>
             </div>
         </Router>
     </Provider>
