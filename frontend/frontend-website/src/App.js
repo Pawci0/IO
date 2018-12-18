@@ -5,13 +5,13 @@ import SearchContainer from './components/front1/containers/SearchContainer';
 import ProductViewContainer from './components/front1/containers/ProductViewContainer';
 import {Provider} from 'react-redux';
 import PropTypes from 'prop-types';
-import {HomePageContainer} from "./components/front2/containers/HomePageContainer";
+import {LoginPageContainer} from "./components/front2/containers/LoginPageContainer";
 
 const App = ({store}) => (
     <Provider store={store}>
         <Router>
             <div>
-                <Route exact path="/" component={HomePageContainer}/>
+                <Route exact path="/" component={LoginPageContainer}/>
                 <Route path="/search" component={SearchContainer}/>
                 <Route path="/product" component={ProductViewContainer}/>
             </div>

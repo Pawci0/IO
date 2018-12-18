@@ -1,3 +1,3 @@
-/**
- * Created by Artur on 2018-12-18.
- */
+import {createBrowserHistory} from 'history';
+
+export const history = createBrowserHistory();
