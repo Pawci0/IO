@@ -21,7 +21,7 @@ namespace RestApi
             );
             
             config.Filters.Add(new AuthorizeAttribute());
-            config.Filters.Add(new UserValidationFilter());
+            config.Filters.Add(new UserExceptionFilter());
             config.Filters.Add(new ValidateModelAttribute());
             config.Filters.Add(new ExceptionLoggingFilter());
             

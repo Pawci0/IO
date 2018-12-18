@@ -39,6 +39,7 @@ namespace RestApi.Controllers
         // DELETE: api/User/5
         public void Delete(int id)
         {
+            _userService.DisableUser(id);
         }
     }
 }

@@ -126,9 +126,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\RecommendationController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Extensions\OwinContextExtensions.cs" />
+    <Compile Include="Extensions\SessionContext.cs" />
     <Compile Include="Filters\ExceptionLoggingFilter.cs" />
-    <Compile Include="Filters\UserValidationFilter.cs" />
+    <Compile Include="Filters\UserExceptionFilter.cs" />
     <Compile Include="Filters\ValidateModelAttribute.cs" />
     <Compile Include="Handlers\RequestsLoggingHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

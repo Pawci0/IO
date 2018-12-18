@@ -4,7 +4,7 @@ using Microsoft.Owin;
 
 namespace RestApi.Extensions
 {
-    public static class OwinContextExtensions
+    public static class SessionContext
     {
         public static int? GetUserId(this IOwinContext ctx)
         {
@@ -12,8 +12,7 @@ namespace RestApi.Extensions
             
             if (claim != null)
             {
-                int id;
-                bool isParsed = int.TryParse(claim.Value, out id);
+                bool isParsed = int.TryParse(claim.Value, out int id);
                 if (isParsed)
                 {
                     return id;

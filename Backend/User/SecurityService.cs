@@ -19,7 +19,7 @@ namespace User
             }
 
             Database.User userByUsername = _database.GetUserByUsername(user.Username);
-            if (userByUsername != null)
+            if (userByUsername != null && userByUsername.IsEnabled)
             {
                 return userByUsername.Username == user.Username && 
                        userByUsername.Password == user.Password;
