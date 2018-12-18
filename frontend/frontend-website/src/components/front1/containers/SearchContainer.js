@@ -14,7 +14,9 @@ class SearchContainer extends Component {
     return (
       <div>
         Search my ass
-        <div>{this.props.products}</div>
+        {this.props.products[0] &&
+        <div>{this.props.products[0].id}</div>
+        }
         <button onClick={this.props.getProductsUsers}>click me</button>
       </div>
     );
