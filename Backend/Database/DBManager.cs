@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Database
 {
-    public class DBManager
+    public class DBManager : IDBManager
     {
         #region UserCUD
         public void CreateUser(string username, string password, string email = null, string name = null, string surname = null)
@@ -381,7 +381,6 @@ namespace Database
                 return ctx.Ratings.ToList();
             }
         }
-
 
         #endregion
 
