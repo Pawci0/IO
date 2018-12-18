@@ -1,4 +1,4 @@
-import {authHeader} from '../helpers/history';
+import {authHeader} from "../helpers/authHeader";
 
 export const userService = {
     login,
@@ -71,7 +71,6 @@ function update(user) {
     };
 
     return fetch(`/users/${user.id}`, requestOptions).then(handleResponse);
-    ;
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
@@ -91,7 +90,7 @@ function handleResponse(response) {
             if (response.status === 400) {
                 // auto logout if 400 response returned from api
                 logout();
-                location.reload(true);
+                // location.reload(true);
             }
 
             const error = (data && data.message) || response.statusText;
