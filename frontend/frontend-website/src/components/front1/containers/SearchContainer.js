@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getProductsUsers } from '../../../actions/SearchPageActions'
 import { bindActionCreators } from 'redux'
+import ProductIcon from '../ProductIcon';
 
 class SearchContainer extends Component {
   constructor(props) {
@@ -13,11 +14,13 @@ class SearchContainer extends Component {
 
     return (
       <div>
-        Search my ass
-        {this.props.products[0] &&
-        <div>{this.props.products[0].id}</div>
-        }
-        <button onClick={this.props.getProductsUsers}>click me</button>
+        <button onClick={this.props.getProductsUsers}>szukaj</button>
+        <div>
+          {this.props.products.map((value) => (
+            <ProductIcon id={value.id} name = {value.name} />
+          ))}
+        </div>
+        
       </div>
     );
   }

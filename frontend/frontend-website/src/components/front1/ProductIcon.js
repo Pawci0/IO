@@ -7,13 +7,13 @@ class ProductIcon extends Component {
 
     return (
       <div>
-        <p href={`/product?id=${this.props.id}`}>{name}</p>
+        <a href={`/product?id=${this.props.id}`}>{this.props.name}</a>
       </div>
     );
   }
 }
 
-SearchContainer.propTypes = {
+ProductIcon.propTypes = {
   id: PropTypes.number,
   name: PropTypes.string,
 }

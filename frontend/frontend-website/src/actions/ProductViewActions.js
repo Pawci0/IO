@@ -3,13 +3,12 @@ import { GET_RECOMMENDED_ACTION } from './actions';
 import { RATE_PRODUCT_ACTION } from './actions';
 
 const getProductAction = (product) => ({ type: GET_PRODUCT_ACTION, data: product })
-const getRecommendedProductsAction = (userId) => ({ type: GET_RECOMMENDED_ACTION, data: products })
+const getRecommendedProductsAction = (products) => ({ type: GET_RECOMMENDED_ACTION, data: products })
 const RateProductAction = (isSuccess) => ({ type: RATE_PRODUCT_ACTION, data: { isSuccess } })
 
 export const getProduct = (id) => dispatch => {
     // request response TODO
     // data mocking for now WIKTOR
-
     const payload = {
         product:
         {
@@ -28,7 +27,6 @@ export const getProduct = (id) => dispatch => {
 export const getRecommendedProducts = (userId) => dispatch => {
     // request response TODO
     // data mocking for now WIKTOR
-
     const payload = {
         products: [
             {
@@ -58,7 +56,7 @@ export const getRecommendedProducts = (userId) => dispatch => {
         ]
     };
 
-    dispatch(getRecommendedProductsAction(payload.product));
+    dispatch(getRecommendedProductsAction(payload.products));
 }
 
 export const rateProduct = (userId) => dispatch => {

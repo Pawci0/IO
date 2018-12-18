@@ -4,7 +4,7 @@ import { RATE_PRODUCT_ACTION } from '../actions/actions';
 
 const initialState = {
     product: {},
-    recommendedProducts: {},
+    recommendedProducts: [],
     rateIsSuccess: {},
 }
 
