@@ -124,7 +124,11 @@
   <ItemGroup>
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\RecommendationController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\SessionContext.cs" />
     <Compile Include="Filters\ExceptionLoggingFilter.cs" />
@@ -153,6 +157,10 @@
     <ProjectReference Include="..\Database\Database.csproj">
       <Project>{2b654924-808d-4117-a0f8-9c40595744e3}</Project>
       <Name>Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Product\Product.csproj">
+      <Project>{85c015da-8484-42d8-b2d5-c5edf8f8e3c5}</Project>
+      <Name>Product</Name>
     </ProjectReference>
     <ProjectReference Include="..\Recommendation\Recommendation.csproj">
       <Project>{c1792981-f5b9-4085-91e0-dde6c539aa24}</Project>

@@ -5,7 +5,7 @@ using System.Text;
 using Database;
 using System.Threading.Tasks;
 
-namespace Product
+namespace ProductModule
 {
     public class TagService
     {
