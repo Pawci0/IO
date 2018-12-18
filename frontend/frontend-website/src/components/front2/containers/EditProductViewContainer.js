@@ -45,10 +45,11 @@ class EditProductViewContainer extends React.Component {
     }
 
     handleNameChange = (e) => {
-
+        this.setState({product: {Name: e.target.value}});
     };
 
     handleDescriptionChange = (e) => {
+        this.setState({product: {Description: e.target.value}});
 
     };
 
