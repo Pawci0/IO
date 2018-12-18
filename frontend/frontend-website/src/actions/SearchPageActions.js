@@ -1,10 +1,10 @@
 import { SEARCH_PRODUCTS_USERS_ACTION } from './actions';
 
-const searchProductsUsersAction = (products) => ({ type: SEARCH_PRODUCTS_USERS_ACTION, data: products })
+const getProductsUsersAction = (products) => ({ type: SEARCH_PRODUCTS_USERS_ACTION, data: products })
 
 export const getProductsUsers = (/*kryteria*/) => dispatch => {
     // request response TODO
-    // data mocking for now
+    // data mocking for now WIKTOR
     console.log('action dispatched');
     const payload = {
         products: [
@@ -19,6 +19,6 @@ export const getProductsUsers = (/*kryteria*/) => dispatch => {
         ]
     };
 
-    dispatch(searchProductsUsersAction(payload.products));
+    dispatch(getProductsUsersAction(payload.products));
 }
 

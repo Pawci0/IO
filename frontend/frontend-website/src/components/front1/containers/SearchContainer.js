@@ -7,16 +7,14 @@ import { bindActionCreators } from 'redux'
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    console.log('asd asd');
   }
-  h = () => {console.log('dsadgg');}
 
   render() {
 
     return (
       <div>
         Search my ass
-        <div>{this.props.test}</div>
+        <div>{this.props.products}</div>
         <button onClick={this.props.getProductsUsers}>click me</button>
       </div>
     );
@@ -24,11 +22,11 @@ class SearchContainer extends Component {
 }
 
 SearchContainer.propTypes = {
-  test: PropTypes.string,
+  products: PropTypes.array,
 }
 
 const mapStateToProps = (state) => ({
-  test: state.search.test,
+  products: state.search.products,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(

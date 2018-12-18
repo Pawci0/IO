@@ -1,22 +1,22 @@
 import { SEARCH_PRODUCTS_USERS_ACTION } from '../actions/actions'
 
 const initialState = {
-    test: 'tescik sracz dziala',
     products: [],
 }
 
 export const getTest = (state) => state.test;
 
 const SearchReducer = (state = initialState, action) => {
-    if (action.type === SEARCH_PRODUCTS_USERS_ACTION) {
-        console.log('action received');
-        return {
+
+    switch (action.type) {
+        case SEARCH_PRODUCTS_USERS_ACTION:
+            return {
             ...state,
             products: action.data,
-            test: 'dispatched',
-          }
-      }
-    return state;
-  }
+            }
+        default:
+            return state
+        }
+}
   
   export default SearchReducer
