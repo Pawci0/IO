@@ -18,11 +18,13 @@ class ProductViewContainer extends Component {
     this.props.getRecommendedProducts(0); // TODO userId
   }
 
-  scoreSubmit = () => {
+  scoreSubmit = (event) => {
     this.props.rateProduct(this.state.score);
+    event.preventDefault()
   }
   scoreChange = (event) => {
     this.setState({score: event.target.value});
+    event.preventDefault()
   }
 
 
@@ -56,7 +58,7 @@ class ProductViewContainer extends Component {
           {this.props.recommendedProducts &&
             <div>
               {this.props.recommendedProducts.map((value) => (
-                <ProductIcon id={value.Product_id} name = {value.Name} />
+                <ProductIcon link={'/product'} id={value.Product_id} name = {value.Name} />
               ))}
             </div>
           }

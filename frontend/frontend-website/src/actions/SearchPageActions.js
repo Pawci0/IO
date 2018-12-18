@@ -5,7 +5,6 @@ const getProductsUsersAction = (products) => ({ type: SEARCH_PRODUCTS_USERS_ACTI
 export const getProductsUsers = (/*kryteria*/) => dispatch => {
     // request response TODO
     // data mocking for now WIKTOR
-    console.log('action dispatched');
     const payload = {
         products: [
             {
