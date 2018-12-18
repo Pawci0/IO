@@ -1,8 +1,6 @@
-using System;
-
 namespace User.Validation
 {
-    public class UserValidationException : Exception
+    public class UserValidationException : UserException
     {
         public UserValidationException()
         {

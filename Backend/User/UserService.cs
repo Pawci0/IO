@@ -20,8 +20,7 @@ namespace User
             Database.User user = _database.GetUserById(id);
             if (user != null)
             {
-                return new UserDto(user.User_Id, user.Username, user.Password,
-                    user.Email, user.Name, user.Surname);
+                return ConvertUserToDto(user);
             }
 
             return null;
@@ -32,8 +31,7 @@ namespace User
             Database.User user = _database.GetUserByUsername(username);
             if (user != null)
             {
-                return new UserDto(user.User_Id, user.Username, user.Password,
-                    user.Email, user.Name, user.Surname);
+                return ConvertUserToDto(user);
             }
 
             return null;
@@ -59,6 +57,19 @@ namespace User
             _database.UpdateUserById(user.Id, user.Username, user.Password, user.Email, user.Name, user.Surname);
         }
 
+        public void DisableUser(int userId)
+        {
+            Database.User userById = _database.GetUserById(userId);
+            if (userById != null)
+            {
+                _database.DeleteUserById(userId);
+            }
+            else
+            {
+                throw new UserException($"User with id {userId} not found");
+            }
+        }
+
         public string GetHashedPassword(string salt, string password)
         {
             HashAlgorithm algorithm = new SHA256Managed();
@@ -67,6 +78,14 @@ namespace User
             byte[] bytesOfSaltAndPassword = Encoding.UTF8.GetBytes(saltAndPassword);
 
             return Convert.ToBase64String(algorithm.ComputeHash(bytesOfSaltAndPassword));
+        }
+
+        private UserDto ConvertUserToDto(Database.User dbUser)
+        {
+            UserDto dtoUser = new UserDto(dbUser.User_Id, dbUser.Username, dbUser.Password,
+                                          dbUser.Email, dbUser.Name, dbUser.Surname, dbUser.IsEnabled);
+
+            return dtoUser;
         }
     }
 }

@@ -5,11 +5,11 @@ using User.Validation;
 
 namespace RestApi.Filters
 {
-    public class UserValidationFilter : ExceptionFilterAttribute 
+    public class UserExceptionFilter : ExceptionFilterAttribute 
     {
         public override void OnException(HttpActionExecutedContext context)
         {
-            if (context.Exception is UserValidationException)
+            if (context.Exception is UserException)
             {
                 context.Response = context.Request.CreateErrorResponse(HttpStatusCode.BadRequest,
                     context.Exception);

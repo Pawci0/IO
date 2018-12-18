@@ -19,7 +19,8 @@ namespace Database
                     Password = password,
                     Email = email,
                     Name = name,
-                    Surname = surname
+                    Surname = surname,
+                    IsEnabled = true
                 });
                 ctx.SaveChanges();
             }
@@ -32,6 +33,16 @@ namespace Database
                 return (from User user in ctx.Users
                         where user.User_Id == id
                         select user).FirstOrDefault();
+            }
+        }
+
+        public User GetActiveUserById(int id)
+        {
+            using (var ctx = new katalogrzeczyEntities())
+            {
+                return (from User user in ctx.Users
+                    where user.User_Id == id && user.IsEnabled
+                    select user).FirstOrDefault();
             }
         }
         
@@ -63,7 +74,7 @@ namespace Database
                 if (user != null)
                 {
                     ctx.Users.Attach(user);
-                    ctx.Users.Remove(user);
+                    user.IsEnabled = false;
                     ctx.SaveChanges();
                 }
             }
