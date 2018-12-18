@@ -1,5 +1,5 @@
 const initialState = {
-    test: 'tescik dziala',
+    test: 'tescik prodakt dziala',
 }
 
 const productView = (state = initialState, action) => {

@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getMyTest } from '../../../reducers'
-import { init } from '../../../actions/SearchPageActions'
+import { getProductsUsers } from '../../../actions/SearchPageActions'
+import { bindActionCreators } from 'redux'
 
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    init();
+    console.log('asd asd');
   }
+  h = () => {console.log('dsadgg');}
 
   render() {
+
     return (
       <div>
         Search my ass
         <div>{this.props.test}</div>
+        <button onClick={this.props.getProductsUsers}>click me</button>
       </div>
     );
   }
@@ -25,10 +28,17 @@ SearchContainer.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  test: getMyTest(state),
+  test: state.search.test,
 })
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    getProductsUsers
+  },
+  dispatch,
+)
 
 export default connect(
   mapStateToProps,
-  { init },
+  mapDispatchToProps,
 )(SearchContainer)
