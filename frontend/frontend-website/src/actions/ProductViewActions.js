@@ -1,8 +1,8 @@
-import { SEARCH_PRODUCTS_USERS_ACTION } from './actions';
+import { GET_PRODUCT } from './actions';
 
-const searchProductsUsersAction = (products) => ({ type: SEARCH_PRODUCTS_USERS_ACTION, data: products })
+const getProduct = (products) => ({ type: SEARCH_GET_PRODUCTS, data: products })
 
-export const getProductsUsers = (/*kryteria*/) => dispatch => {
+export const getProducts = (/*kryteria*/) => dispatch => {
     // request response TODO
     // data mocking for now
     console.log('action dispatched');
@@ -19,6 +19,6 @@ export const getProductsUsers = (/*kryteria*/) => dispatch => {
         ]
     };
 
-    dispatch(searchProductsUsersAction(payload.products));
+    dispatch(searchGetProductsAction(payload.products));
 }
 

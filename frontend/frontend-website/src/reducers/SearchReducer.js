@@ -1,4 +1,4 @@
-import { SEARCH_GET_PRODUCTS } from '../actions/actions'
+import { SEARCH_PRODUCTS_USERS_ACTION } from '../actions/actions'
 
 const initialState = {
     test: 'tescik sracz dziala',
@@ -8,7 +8,7 @@ const initialState = {
 export const getTest = (state) => state.test;
 
 const SearchReducer = (state = initialState, action) => {
-    if (action.type === SEARCH_GET_PRODUCTS) {
+    if (action.type === SEARCH_PRODUCTS_USERS_ACTION) {
         console.log('action received');
         return {
             ...state,
