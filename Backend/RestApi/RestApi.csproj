@@ -124,6 +124,7 @@
   <ItemGroup>
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\RecommendationController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\OwinContextExtensions.cs" />
     <Compile Include="Filters\ExceptionLoggingFilter.cs" />
@@ -149,6 +150,14 @@
     <Folder Include="Results\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Database\Database.csproj">
+      <Project>{2b654924-808d-4117-a0f8-9c40595744e3}</Project>
+      <Name>Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Recommendation\Recommendation.csproj">
+      <Project>{c1792981-f5b9-4085-91e0-dde6c539aa24}</Project>
+      <Name>Recommendation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\User\User.csproj">
       <Project>{a14fa44f-a1a7-4ea7-a4be-f50e7b468552}</Project>
       <Name>User</Name>
