@@ -1,4 +1,6 @@
 ﻿using SearchEngine;
+using SearchEngine.DTO;
+using SearchEngine.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
