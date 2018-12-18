@@ -17,7 +17,7 @@ const App = ({store}) => (
                 <Route path="/search" component={SearchContainer}/>
                 <Route path="/product" component={ProductViewContainer}/>
                 <Route path="/register" component={RegisterViewContainer}/>
-                <Route path="/edit_product/:id" component={EditProductViewContainer}/>
+                <Route path="/edit_product" component={EditProductViewContainer}/>
             </div>
         </Router>
     </Provider>
