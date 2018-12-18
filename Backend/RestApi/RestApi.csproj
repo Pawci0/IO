@@ -126,10 +126,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductSearchController.cs" />
     <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\RecommendationController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserSearchController.cs" />
     <Compile Include="Extensions\SessionContext.cs" />
     <Compile Include="Filters\ExceptionLoggingFilter.cs" />
     <Compile Include="Filters\UserExceptionFilter.cs" />
@@ -165,6 +167,10 @@
     <ProjectReference Include="..\Recommendation\Recommendation.csproj">
       <Project>{c1792981-f5b9-4085-91e0-dde6c539aa24}</Project>
       <Name>Recommendation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SearchEngine\SearchEngine.csproj">
+      <Project>{b542b9e2-488b-44d6-8113-2cc636fd46a8}</Project>
+      <Name>SearchEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\User\User.csproj">
       <Project>{a14fa44f-a1a7-4ea7-a4be-f50e7b468552}</Project>
