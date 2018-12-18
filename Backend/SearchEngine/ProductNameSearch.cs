@@ -16,9 +16,14 @@ namespace SearchEngine
             float score = 0;
             IEnumerable<ProductDTO> results = from Product product in dataContext.GetAllProducts()
                                             where product.Name.ContainsFuzzy(phrase, out score)
-                                            select new ProductDTO(product, score);
+                                            select new ProductDTO(product, AverageRatings(product.Ratings), score);
 
-            if(searchResult is null)
+            if (filters != null && filters.Any())
+            {
+                results = ApplyFilters(results, filters);
+            }
+
+            if (searchResult is null)
             {
                 searchResult = OrderBy(results, sortType).ToList();
             }

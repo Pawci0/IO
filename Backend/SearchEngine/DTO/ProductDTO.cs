@@ -14,9 +14,10 @@ namespace SearchEngine.DTO
         public string Category_Name { get; }
         public string User_Username { get; }
         public string Description { get; }
+        public double AverageRating { get; }
         public float Score { get; }
 
-        internal ProductDTO(Product product, float searchScore)
+        internal ProductDTO(Product product, double averageRating, float searchScore)
         {
             Product_Id = product.Product_Id;
             Name = product.Name;

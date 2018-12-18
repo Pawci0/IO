@@ -15,7 +15,12 @@ namespace SearchEngine
             float score = 0;
             IEnumerable<ProductDTO> results = from Product product in dataContext.GetAllProducts()
                                            where AverageRatings(product.Ratings).ToString().ContainsFuzzy(phrase, out score)
-                                           select new ProductDTO(product, score);
+                                           select new ProductDTO(product, AverageRatings(product.Ratings), score);
+
+            if(filters != null && filters.Any())
+            {
+                results = ApplyFilters(results, filters);
+            }
 
             if (searchResult is null)
             {
@@ -26,17 +31,5 @@ namespace SearchEngine
                 searchResult.AddRange(OrderBy(results, sortType));
             }
         }
-
-        private double AverageRatings(ICollection<Database.Rating> ratings)
-        {
-            double avg = 0;
-            foreach (var value in ratings)
-            {
-                avg += value.Value;
-            }
-
-            return Math.Round(avg / ratings.Count, 2);
-        }
-
     }
 }

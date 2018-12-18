@@ -17,7 +17,12 @@ namespace SearchEngine
             IEnumerable<ProductDTO> results = from Product product in dataContext.GetAllProducts()
                                            from Tag tag in product.Tags
                                            where tag.Name.ContainsFuzzy(phrase, out score)
-                                           select new ProductDTO(product, score);
+                                           select new ProductDTO(product, AverageRatings(product.Ratings), score);
+
+            if (filters != null && filters.Any())
+            {
+                results = ApplyFilters(results, filters);
+            }
 
             if (searchResult is null)
             {
