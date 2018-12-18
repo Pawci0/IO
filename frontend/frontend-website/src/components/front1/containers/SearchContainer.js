@@ -13,7 +13,7 @@ class SearchContainer extends Component {
         <button onClick={this.props.getProductsUsers}>szukaj</button>
         <div>
           {this.props.products.map((value) => (
-            <ProductIcon id={value.id} name = {value.name} />
+            <ProductIcon link={'/product'} id={value.Product_id} name = {value.Name} />
           ))}
         </div>
         

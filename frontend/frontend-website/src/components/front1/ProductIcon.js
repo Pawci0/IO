@@ -7,7 +7,7 @@ class ProductIcon extends Component {
 
     return (
       <div>
-        <a href={`/product?id=${this.props.id}`}>{this.props.name}</a>
+        <a href={`${this.props.link}?id=${this.props.id}`}>{this.props.name}</a>
       </div>
     );
   }
@@ -16,6 +16,7 @@ class ProductIcon extends Component {
 ProductIcon.propTypes = {
   id: PropTypes.number,
   name: PropTypes.string,
+  link: PropTypes.string.isRequired,
 }
 
 export default ProductIcon
