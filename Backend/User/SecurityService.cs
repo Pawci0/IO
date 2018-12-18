@@ -4,7 +4,7 @@ namespace User
 {
     public class SecurityService
     {
-        private DBManager _database;
+        private IDBManager _database;
         
         public SecurityService()
         {

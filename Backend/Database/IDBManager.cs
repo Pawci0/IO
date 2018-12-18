@@ -12,6 +12,8 @@ namespace Database
 
         void CreateUser(string username, string password, string email = null, string name = null, string surname = null);
         User GetUserById(int id);
+        User GetUserByUsername(string username);
+        User GetUserByEmail(string email);
         void DeleteUserById(int id);
         void UpdateUserById(int id,
                                    string username = null,

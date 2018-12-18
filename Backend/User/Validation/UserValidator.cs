@@ -6,9 +6,9 @@ namespace User.Validation
 {
     public class UserValidator
     {
-        private DBManager _dbManager;
+        private IDBManager _dbManager;
 
-        public UserValidator(DBManager dbManager)
+        public UserValidator(IDBManager dbManager)
         {
             _dbManager = dbManager;
         }

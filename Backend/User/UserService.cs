@@ -8,7 +8,7 @@ namespace User
 {
     public class UserService
     {
-        private DBManager _database;
+        private IDBManager _database;
         
         public UserService()
         {
