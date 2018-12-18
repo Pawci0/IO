@@ -15,6 +15,11 @@ namespace SearchEngine
                                             where (user.Name + " " + user.Surname).ContainsFuzzy(phrase, out score)
                                             select new UserDTO(user, score);
 
+            if (filters != null && filters.Any())
+            {
+                results = ApplyFilters(results, filters);
+            }
+
             if (searchResult is null)
             {
                 searchResult = OrderBy(results, sortType).ToList();

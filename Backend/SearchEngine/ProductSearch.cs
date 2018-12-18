@@ -58,7 +58,7 @@ namespace SearchEngine
                 }
             }
 
-            return null;
+            return input;
         }
 
         protected double AverageRatings(ICollection<Database.Rating> ratings)
