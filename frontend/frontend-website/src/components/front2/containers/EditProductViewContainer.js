@@ -11,7 +11,7 @@ class EditProductViewContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {product: {}};
+        this.state = {};
     }
 
     render() {
@@ -44,17 +44,31 @@ class EditProductViewContainer extends React.Component {
         );
     }
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        const {product} = nextProps;
+        if (product.Name && !prevState.product) {
+            let s = {...prevState};
+            s.product = product;
+            return s;
+        }
+    }
+
     handleNameChange = (e) => {
-        this.setState({product: {Name: e.target.value}});
+        let s = this.state.product;
+        s.Name = e.target.value;
+        this.setState({product: s});
     };
 
     handleDescriptionChange = (e) => {
-        this.setState({product: {Description: e.target.value}});
-
+        let s = this.state.product;
+        s.Description = e.target.value;
+        this.setState({product: s});
     };
 
-    submit = () => {
-        alert(this.state.product.name + " " + this.state.product.Description);
+    submit = (e) => {
+        e.preventDefault();
+        alert(this.state.product.Name + " " + this.state.product.Description);
+        // alert(this.props.product.Name + " " + this.props.product.Description);
     };
 
     componentDidMount() {
