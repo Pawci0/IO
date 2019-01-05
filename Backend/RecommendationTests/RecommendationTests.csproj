@@ -80,6 +80,10 @@
       <Project>{2B654924-808D-4117-A0F8-9C40595744E3}</Project>
       <Name>Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Product\Product.csproj">
+      <Project>{85C015DA-8484-42D8-B2D5-C5EDF8F8E3C5}</Project>
+      <Name>Product</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Recommendation\Recommendation.csproj">
       <Project>{C1792981-F5B9-4085-91E0-DDE6C539AA24}</Project>
       <Name>Recommendation</Name>

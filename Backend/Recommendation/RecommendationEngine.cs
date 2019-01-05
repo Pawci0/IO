@@ -1,4 +1,5 @@
 ﻿using Database;
+using ProductModule;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace Recommendation
             this.db = db;
         }
 
-        public IEnumerable<Product> GetRecommendedProducts(int userId, int amount)
+        public IEnumerable<ProductDto> GetRecommendedProducts(int userId, int amount)
         {
             return SelectEngine(userId).GetRecommendedProducts(userId, amount);
         }

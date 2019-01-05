@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Database;
+using ProductModule;
 
 namespace Recommendation
 {
@@ -12,9 +13,16 @@ namespace Recommendation
             this.db = db;
         }
 
-        public IEnumerable<Product> GetRecommendedProducts(int userId, int amount)
+        public IEnumerable<ProductDto> GetRecommendedProducts(int userId, int amount)
         {
-            return db.GetAllProducts().Shuffle().Take(amount);
+            return db.GetAllProducts().Shuffle().Take(amount).Select(x => new ProductDto
+            {
+                productId = x.Product_Id,
+                name = x.Name,
+                categoryId = x.Category_Id.HasValue ? x.Category_Id.Value : -1,
+                userId = x.User_Id,
+                description = x.Description                
+            });
         }
     }
 }

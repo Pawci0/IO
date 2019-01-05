@@ -494,12 +494,26 @@ namespace Recommendation.Tests
                                                                                             select prod).First());
             var expected = (from Product prod in productList
                             where prod.Product_Id % 2 == 0
-                            select prod).ToList();
+                            select prod).Select(x => new ProductModule.ProductDto
+                            {
+                                productId = x.Product_Id,
+                                name = x.Name,
+                                categoryId = x.Category_Id ?? -1,
+                                userId = x.User_Id,
+                                description = x.Description
+                            }).ToList();
             var engine = new RecommendationEngine(mockDatabase.Object);
             var result = engine.GetRecommendedProducts(1, 5).ToList();
             Assert.AreEqual(5, result.Count());
             CollectionAssert.AllItemsAreNotNull(result);
-            CollectionAssert.AreEqual(expected, result);
+            foreach (var item in expected.Zip(result, (first, second) => new { First = first, Second = second }))
+            {
+                Assert.AreEqual(item.First.productId, item.Second.productId);
+                Assert.AreEqual(item.First.name, item.Second.name);
+                Assert.AreEqual(item.First.userId, item.Second.userId);
+                Assert.AreEqual(item.First.categoryId, item.Second.categoryId);
+                Assert.AreEqual(item.First.description, item.Second.description);
+            }
             
         }
     }
