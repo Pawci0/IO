@@ -42,18 +42,17 @@ namespace Database
 
         #region TagCUD
 
-        void CreateTag(int tagId, string name);
+        void CreateTag(string name);
         Tag GetTagById(int id);
         void DeleteTagById(int id);
-        void UpdateTagById(int id,
-                                  string name = null);
+        void UpdateTagById(int id, string name = null);
         List<Tag> GetAllTags();
 
         #endregion
 
         #region CategoryCUD
 
-        void CreateCategory(int categoryId, string name);
+        void CreateCategory(string name);
         Category GetCategoryById(int id);
         void DeleteCategoryById(int id);
         void UpdateCategoryById(int id,

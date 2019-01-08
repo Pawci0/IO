@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Database
 {
@@ -32,7 +33,9 @@ namespace Database
             {
                 return (from User user in ctx.Users
                         where user.User_Id == id
-                        select user).FirstOrDefault();
+                        select user).Include(u=>u.Products)
+                                    .Include(u=>u.Ratings)
+                                    .FirstOrDefault();
             }
         }
 
@@ -42,7 +45,9 @@ namespace Database
             {
                 return (from User user in ctx.Users
                     where user.User_Id == id && user.IsEnabled
-                    select user).FirstOrDefault();
+                    select user).Include(u => u.Products)
+                                .Include(u => u.Ratings)
+                                .FirstOrDefault();
             }
         }
         
@@ -52,7 +57,9 @@ namespace Database
             {
                 return (from User user in ctx.Users
                     where user.Username == username
-                    select user).FirstOrDefault();
+                    select user).Include(u => u.Products)
+                                .Include(u => u.Ratings)
+                                .FirstOrDefault();
             }
         }
         
@@ -62,7 +69,9 @@ namespace Database
             {
                 return (from User user in ctx.Users
                     where user.Email == email
-                    select user).FirstOrDefault();
+                    select user).Include(u => u.Products)
+                                .Include(u => u.Ratings)
+                                .FirstOrDefault();
             }
         }
 
@@ -107,24 +116,27 @@ namespace Database
         {
             using (var ctx = new katalogrzeczyEntities())
             {
-                return ctx.Users.ToList();
+                return ctx.Users.Include(u => u.Products)
+                                .Include(u => u.Ratings)
+                                .ToList();
             }
         }
         #endregion
 
         #region ProductCUD
 
-        public void CreateProduct(string name, int categoryId, int  userId, string description = null)
+        public void CreateProduct(string name, int categoryId, int userId, string description = null)
         {
             using (var ctx = new katalogrzeczyEntities())
             {
-                ctx.Products.Add(new Product()
+                Product product = new Product()
                 {
                     Name = name,
                     Category_Id = categoryId,
                     User_Id = userId,
                     Description = description
-                });
+                };
+                ctx.Products.Add(product);
                 ctx.SaveChanges();
             }
         }
@@ -135,7 +147,9 @@ namespace Database
             {
                 return (from Product product in ctx.Products
                         where product.Product_Id == id
-                        select product).FirstOrDefault();
+                        select product).Include(p => p.Ratings)
+                                       .Include(p => p.Tags)
+                                       .FirstOrDefault();
             }
         }
 
@@ -183,7 +197,9 @@ namespace Database
         {
             using (var ctx = new katalogrzeczyEntities())
             {
-                return ctx.Products.ToList();
+                return ctx.Products.Include(p => p.Ratings)
+                                   .Include(p => p.Tags)
+                                   .ToList();
             }
         }
 
@@ -191,14 +207,13 @@ namespace Database
 
         #region TagCUD
 
-        public void CreateTag(int tagId, string name)
+        public void CreateTag(string name)
         {
             using (var ctx = new katalogrzeczyEntities())
             {
                 ctx.Tags.Add(new Tag()
                 {
-                    Tag_Id = tagId,
-                    Name = name,
+                    Name = name
                 });
                 ctx.SaveChanges();
             }
@@ -210,7 +225,8 @@ namespace Database
             {
                 return (from Tag tag in ctx.Tags
                         where tag.Tag_Id == id
-                        select tag).FirstOrDefault();
+                        select tag).Include(t=>t.Products)
+                                   .FirstOrDefault();
             }
         }
 
@@ -248,7 +264,8 @@ namespace Database
         {
             using (var ctx = new katalogrzeczyEntities())
             {
-                return ctx.Tags.ToList();
+                return ctx.Tags.Include(t => t.Products)
+                               .ToList();
             }
         }
 
@@ -256,14 +273,13 @@ namespace Database
 
         #region CategoryCUD
 
-        public void CreateCategory(int categoryId, string name)
+        public void CreateCategory(string name)
         {
             using (var ctx = new katalogrzeczyEntities())
             {
                 ctx.Categories.Add(new Category()
                 {
-                    Category_Id = categoryId,
-                    Name = name,
+                    Name = name
                 });
                 ctx.SaveChanges();
             }
@@ -275,7 +291,8 @@ namespace Database
             {
                 return (from Category category in ctx.Categories
                         where category.Category_Id == id
-                        select category).FirstOrDefault();
+                        select category).Include(c => c.Products)
+                                        .FirstOrDefault();
             }
         }
 
@@ -313,7 +330,8 @@ namespace Database
         {
             using (var ctx = new katalogrzeczyEntities())
             {
-                return ctx.Categories.ToList();
+                return ctx.Categories.Include(c=>c.Products)
+                                     .ToList();
             }
         }
 

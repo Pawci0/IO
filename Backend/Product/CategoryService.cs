@@ -28,7 +28,7 @@ namespace ProductModule
 
         public void CreateCategory(CategoryDto category)
         {
-            db.CreateCategory(category.categoryId, category.name);
+            db.CreateCategory(category.name);
         }
 
         public void UpdateCategory(CategoryDto category)

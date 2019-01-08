@@ -15,20 +15,11 @@ namespace Database
     
     public partial class katalogrzeczyEntities : DbContext
     {
-        private katalogrzeczyEntities instance;
-
-        public katalogrzeczyEntities GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new katalogrzeczyEntities();
-            }
-            return instance;
-        }
-
         public katalogrzeczyEntities()
             : base("katalogrzeczyEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

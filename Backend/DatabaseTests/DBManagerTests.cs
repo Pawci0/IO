@@ -30,5 +30,24 @@ namespace Database.Tests
             int countAfter = manager.GetAllUsers().Count;
             Assert.AreEqual(countBefore - 1, countAfter);
         }
+
+        [TestMethod()]
+        public void BlaBla()
+        {
+            var v = manager.GetAllCategories();
+            manager.CreateCategory("test11");
+            var cat = manager.GetAllCategories().Find(c => c.Name == "test11");
+            Assert.AreEqual(0, cat.Products.Count);
+            manager.CreateProduct("a thing", cat.Category_Id, 1);
+            cat = manager.GetAllCategories().Find(c => c.Name == "test11");
+            Assert.AreEqual(1, cat.Products.Count);
+        }
+
+        [TestMethod()]
+        public void UserProducts()
+        {
+            var user = manager.GetUserById(1);
+            Assert.AreNotEqual(0, user.Products);
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace ProductModule
 
         public void CreateTag(TagDto tag)
         {
-            db.CreateTag(tag.tagId, tag.name);
+            db.CreateTag(tag.name);
         }
 
         public void UpdateTag(TagDto tag)
