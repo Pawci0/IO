@@ -1,3 +1,4 @@
+using Database;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
@@ -12,7 +13,17 @@ namespace RestApi.Filters
             if (context.Exception is UserException)
             {
                 context.Response = context.Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                    context.Exception);
+                    context.Exception.Message);
+            }
+            else if(context.Exception is DBDuplicateException)
+            {
+                context.Response = context.Request.CreateErrorResponse(HttpStatusCode.Conflict,
+                    context.Exception.Message);
+            }
+            else
+            {
+                context.Response = context.Request.CreateErrorResponse(HttpStatusCode.InternalServerError,
+                    context.Exception.Message);
             }
         }
     }

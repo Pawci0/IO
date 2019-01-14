@@ -14,6 +14,10 @@ namespace Database
         {
             using(var ctx = new katalogrzeczyEntities())
             {
+                if(ctx.Users.Where(u=>u.Username == username).Count() != 0)
+                {
+                    throw new DBDuplicateException("User of same username already exists");
+                }
                 ctx.Users.Add(new User()
                 {
                     Username = username,
@@ -211,6 +215,10 @@ namespace Database
         {
             using (var ctx = new katalogrzeczyEntities())
             {
+                if (ctx.Tags.Where(t => t.Name == name).Count() != 0)
+                {
+                    throw new DBDuplicateException("Tag already exists");
+                }
                 ctx.Tags.Add(new Tag()
                 {
                     Name = name
@@ -277,6 +285,10 @@ namespace Database
         {
             using (var ctx = new katalogrzeczyEntities())
             {
+                if (ctx.Categories.Where(c => c.Name == name).Count() != 0)
+                {
+                    throw new DBDuplicateException("Category already exists");
+                }
                 ctx.Categories.Add(new Category()
                 {
                     Name = name
@@ -343,6 +355,10 @@ namespace Database
         {
             using (var ctx = new katalogrzeczyEntities())
             {
+                if (ctx.Ratings.Where(r => r.Product_Id == productId && r.User_id == userId).Count() != 0)
+                {
+                    throw new DBDuplicateException("Product already rated by this user");
+                }
                 ctx.Ratings.Add(new Rating()
                 {
                     Product_Id = productId,

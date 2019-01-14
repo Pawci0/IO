@@ -49,5 +49,37 @@ namespace Database.Tests
             var user = manager.GetUserById(1);
             Assert.AreNotEqual(0, user.Products);
         }
+
+        [TestMethod()]
+        public void DuplicationCheck()
+        {
+            if (manager.GetUserByUsername("testDuplikatu") == null)
+            {
+                manager.CreateUser("testDuplikatu", "testoweHaslo");
+            }
+            Assert.ThrowsException<DBDuplicateException>(()=>manager.CreateUser("testDuplikatu", "testoweHaslo"));
+            var x = manager.GetAllTags();
+
+            if (manager.GetAllTags().Find(tag => tag.Name == "testDuplikatu") == null)
+            {
+                manager.CreateTag("testDuplikatu");
+            }
+            Assert.ThrowsException<DBDuplicateException>(() => manager.CreateTag("testDuplikatu"));
+
+            if (manager.GetAllCategories().Find(cat => cat.Name == "testDuplikatu") == null)
+            {
+                manager.CreateCategory("testDuplikatu");
+            }
+            Assert.ThrowsException<DBDuplicateException>(() => manager.CreateCategory("testDuplikatu"));
+
+            var userId = manager.GetAllUsers().First().User_Id;
+            var productId = manager.GetAllProducts().First().Product_Id;
+
+            if (manager.GetAllRatings().Find(r => r.Product_Id == productId && r.User_id == userId) == null)
+            {
+                manager.CreateRating(productId, userId, 5, "testDuplikatu");
+            }
+            Assert.ThrowsException<DBDuplicateException>(() => manager.CreateRating(productId, userId, 5, "testDuplikatu"));
+        }
     }
 }
