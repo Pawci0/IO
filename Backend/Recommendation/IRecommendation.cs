@@ -1,10 +1,10 @@
-﻿using Database;
+﻿using ProductModule;
 using System.Collections.Generic;
 
 namespace Recommendation
 {
     interface IRecommendation
     {
-        IEnumerable<Product> GetRecommendedProducts(int userId, int amount);
+        IEnumerable<ProductDto> GetRecommendedProducts(int userId, int amount);
     }
 }

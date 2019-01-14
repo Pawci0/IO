@@ -1,4 +1,5 @@
 ﻿using Database;
+using ProductModule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,19 @@ namespace Recommendation
             this.db = db;
         }
 
-        public IEnumerable<Product> GetRecommendedProducts(int userId, int amount)
+        public IEnumerable<ProductDto> GetRecommendedProducts(int userId, int amount)
         {
             var ratings = GetUserRatings(userId);
             var bestRatings = ratings.OrderByDescending(rating => rating.Value).Take(amount);
             var bestRatedProducts = GetProductsFromRatings(bestRatings);
-            return GetProductsFromBestCategories(bestRatedProducts, amount);
+            return GetProductsFromBestCategories(bestRatedProducts, amount).Select(x => new ProductDto
+            {
+                productId = x.Product_Id,
+                name = x.Name,
+                categoryId = x.Category_Id.HasValue ? x.Category_Id.Value : -1,
+                userId = x.User_Id,
+                description = x.Description
+            });
         }
 
         private IEnumerable<Rating> GetUserRatings(int userId)
