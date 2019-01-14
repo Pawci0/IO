@@ -16,31 +16,22 @@ namespace Database.Tests
         [TestMethod()]
         public void CreateUserTest()
         {
-            int countBefore = manager.GetAllUsers().Count;
-            manager.CreateUser("a", "b");
+            int exectedCount = manager.GetAllUsers().Count;
+            if(manager.GetUserByUsername("a") == null)
+            {
+                manager.CreateUser("a", "b");
+                exectedCount++;
+            }
             int countAfter = manager.GetAllUsers().Count;
-            Assert.AreEqual(countBefore + 1, countAfter);
+            Assert.AreEqual(exectedCount, countAfter);
         }
 
         [TestMethod()]
         public void DeleteUserByIdTest()
         {
-            int countBefore = manager.GetAllUsers().Count;
-            manager.DeleteUserById(countBefore-1);
-            int countAfter = manager.GetAllUsers().Count;
-            Assert.AreEqual(countBefore - 1, countAfter);
-        }
-
-        [TestMethod()]
-        public void BlaBla()
-        {
-            var v = manager.GetAllCategories();
-            manager.CreateCategory("test11");
-            var cat = manager.GetAllCategories().Find(c => c.Name == "test11");
-            Assert.AreEqual(0, cat.Products.Count);
-            manager.CreateProduct("a thing", cat.Category_Id, 1);
-            cat = manager.GetAllCategories().Find(c => c.Name == "test11");
-            Assert.AreEqual(1, cat.Products.Count);
+            var id = manager.GetAllUsers().First().User_Id;
+            manager.DeleteUserById(id);
+            Assert.IsFalse(manager.GetUserById(id).IsEnabled);
         }
 
         [TestMethod()]
@@ -58,7 +49,6 @@ namespace Database.Tests
                 manager.CreateUser("testDuplikatu", "testoweHaslo");
             }
             Assert.ThrowsException<DBDuplicateException>(()=>manager.CreateUser("testDuplikatu", "testoweHaslo"));
-            var x = manager.GetAllTags();
 
             if (manager.GetAllTags().Find(tag => tag.Name == "testDuplikatu") == null)
             {
@@ -71,15 +61,6 @@ namespace Database.Tests
                 manager.CreateCategory("testDuplikatu");
             }
             Assert.ThrowsException<DBDuplicateException>(() => manager.CreateCategory("testDuplikatu"));
-
-            var userId = manager.GetAllUsers().First().User_Id;
-            var productId = manager.GetAllProducts().First().Product_Id;
-
-            if (manager.GetAllRatings().Find(r => r.Product_Id == productId && r.User_id == userId) == null)
-            {
-                manager.CreateRating(productId, userId, 5, "testDuplikatu");
-            }
-            Assert.ThrowsException<DBDuplicateException>(() => manager.CreateRating(productId, userId, 5, "testDuplikatu"));
         }
     }
 }
