@@ -1,8 +1,10 @@
 import {EDIT_PRODUCT} from "./actions";
 import {UPDATE_PRODUCT} from "./actions";
+import {ADD_PRODUCT} from "./actions";
 
 const getProductAction = (product) => ({type: EDIT_PRODUCT, data: product});
 const updateProductAction = () => ({type: UPDATE_PRODUCT});
+const addProductAction = () => ({type: ADD_PRODUCT});
 
 export const getProduct = (id) => dispatch => {
     // request response TODO
@@ -27,3 +29,9 @@ export const editProduct = (product) => dispatch => {
 
     dispatch(updateProductAction());
 };
+
+export const addProduct = (product) => dispatch => {
+    // TODO implement request
+
+    dispatch(updateProductAction());
+}
