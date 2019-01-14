@@ -93,6 +93,8 @@ class RegisterViewContainer extends React.Component {
                         <Link to="/login" className="btn btn-link">Cancel</Link>
                     </div>
                 </form>
+                <br></br>
+                <a href="/search">szukajka </a>
             </div>
         );
     }

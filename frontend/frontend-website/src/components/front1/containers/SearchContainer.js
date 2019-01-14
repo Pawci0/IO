@@ -4,12 +4,14 @@ import { connect } from 'react-redux'
 import { getProductsUsers } from '../../../actions/SearchPageActions'
 import { bindActionCreators } from 'redux'
 import ProductIcon from '../ProductIcon';
+import Pasek from '../../common/Pasek';
 
 class SearchContainer extends Component {
   render() {
 
     return (
       <div>
+        <Pasek />
         <button onClick={this.props.getProductsUsers}>szukaj</button>
         <div>
           {this.props.products.map((value) => (

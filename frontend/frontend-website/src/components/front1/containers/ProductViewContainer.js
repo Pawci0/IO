@@ -63,6 +63,10 @@ class ProductViewContainer extends Component {
             </div>
           }
         </div>
+        <div>
+          <br></br>
+          <a href="/search">powrót do szukajki</a>
+        </div>
       </div>
     );
   }

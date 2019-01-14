@@ -64,6 +64,8 @@ class LoginPageContainer extends React.Component {
                         <Link to="/register" className="btn btn-link">Register</Link>
                     </div>
                 </form>
+                <br></br>
+                <a href="/search">szukajka </a>
             </div>
         );
     }
