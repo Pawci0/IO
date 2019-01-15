@@ -1,8 +1,9 @@
 ﻿using ProductModule;
 using System.Linq;
 using System.Net;
-using System.Web.Http;
 using System.Web.Http.Cors;
+using RestApi.Extensions;
+using System.Web.Http;
 
 namespace RatingApi.Controllers
 {
@@ -18,24 +19,13 @@ namespace RatingApi.Controllers
         }
 
         // GET: api/Rating/5
-        public RatingDto Get(int id)
+        public int Get(int id)
         {
-            RatingDto ratingDto = _ratingService.GetRating(id);
-            if (ratingDto != null)
-                return ratingDto;
-
-            throw new HttpResponseException(HttpStatusCode.NotFound);
-        }
-
-        [HttpGet]
-        [Route("GetAvarageRating")]
-        public double GetAverageRating(int productId)
-        {
-            var allRatings = _ratingService.GetAllRatings(productId);
-            var ratings = allRatings.Where(r => r.Product_Id == productId);
-            if(ratings.Count() != 0)
+            var allRatings = _ratingService.GetAllRatings(id);
+            var ratings = allRatings.Where(r => r.Product_Id == id);
+            if (ratings.Count() != 0)
             {
-                return ratings.Sum(r => r.Value)/ratings.Count();
+                return ratings.Sum(r => r.Value) / ratings.Count();
             }
             else
             {
