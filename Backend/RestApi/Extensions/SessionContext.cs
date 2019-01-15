@@ -1,15 +1,18 @@
 using System.Linq;
+using System.Security.Authentication;
 using System.Security.Claims;
+using System.Web;
 using Microsoft.Owin;
 
 namespace RestApi.Extensions
 {
     public static class SessionContext
     {
-        public static int? GetUserId(this IOwinContext ctx)
+        public static int TryGetUserId()
         {
-            Claim claim = ctx.Authentication.User.Claims.FirstOrDefault(c => c.Type == "UserID");
-            
+            IOwinContext ctx = HttpContext.Current.GetOwinContext();
+            Claim claim = ctx?.Authentication.User.Claims.FirstOrDefault(c => c.Type == "UserID");
+
             if (claim != null)
             {
                 bool isParsed = int.TryParse(claim.Value, out int id);
@@ -18,8 +21,8 @@ namespace RestApi.Extensions
                     return id;
                 }
             }
-            
-            return null;
+
+            throw new AuthenticationException("User is not authenticated");
         }
     }
 }

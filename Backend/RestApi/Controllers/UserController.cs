@@ -1,12 +1,13 @@
 ﻿using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using RestApi.Extensions;
 using User;
 
 namespace RestApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/User")]
     public class UserController : ApiController
     {
         private UserService _userService;
@@ -26,8 +27,16 @@ namespace RestApi.Controllers
             throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
-        // POST: api/User
+        [HttpGet]
+        [Route("GetCurrentId")]
+        // GET: api/User/
+        public int GetCurrentUserId()
+        {
+            return SessionContext.TryGetUserId();
+        }
+
         [AllowAnonymous]
+        // POST: api/User
         public void Post([FromBody]UserDto value)
         {
             _userService.CreateUser(value);
@@ -36,6 +45,7 @@ namespace RestApi.Controllers
         // PUT: api/User/5
         public void Put(int id, [FromBody]UserDto value)
         {
+            value.Id = id;
             _userService.UpdateUser(value);
         }
 
