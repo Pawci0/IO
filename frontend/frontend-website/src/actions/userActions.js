@@ -1,6 +1,7 @@
 import {userConstants} from '../constants/userConstants';
 import {userService} from '../services/userServices';
 import {alertActions} from "./alertActions";
+import * as appRequests from "../utils/AppRequests";
 
 export const userActions = {
     login,
@@ -13,17 +14,17 @@ export const userActions = {
 function login(username, password) {
     return dispatch => {
         dispatch(request({username}));
-
-        userService.login(username, password)
-            .then(
-                user => {
-                    dispatch(success(user));
-                },
-                error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                }
-            );
+        const user = {};
+        appRequests.getUserId(username, password).then(function (response) {
+            const res = response.data;
+            console.log('user ID');
+            console.log(res);
+            user.id = 1;
+            dispatch(success(user));
+        }).catch((error) => {
+            console.log('error ' + error);   
+            });
+                   
     };
 
     function request(user) {

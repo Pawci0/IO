@@ -11,6 +11,42 @@ const reloadAxios = async () => {
   return myaxios;
 }
 
+const reloadAxiosUser = async (login, password) => {
+  const myaxios = require('axios');
+  const a = await generateAuthTokenUser(login, password);
+  myaxios.defaults.headers.common['Authorization'] = a;
+  return myaxios;
+}
+
+export const generateAuthTokenUser = async (login, password) => {
+  const data = {
+      grant_type: 'password',
+      client_id: '1',
+      client_secret: 'asd',
+      scope: 'asd',
+      username: login,
+      password: password
+    };
+
+    let myauth;
+
+  await axios.post(`${endpoints.url}:53026/token`, Querystring.stringify(data))   
+   .then(response => {
+      //console.log(response.data);
+      myauth = response.data.access_token;
+      //console.log('userresponse ' + response.data.access_token); 
+    })   
+   .catch((error) => {
+      console.log('error ' + error);   
+   });
+
+
+
+const AuthStr = 'Bearer '.concat(myauth); 
+return AuthStr;
+}
+
+
 export const generateAuthToken = async () => {
     const data = {
         grant_type: 'password',
@@ -65,9 +101,9 @@ export const updateProductCategory = async (categoryId) => {
   return axios.get(`${endpoints.category}/${categoryId}`);
 }
 
-export const updateProductRating = async (productId) => {
+export const updateProductRating = async (ratingId) => {
   //axios = await reloadAxios();
-  return axios.get(`${endpoints.rating}/${productId}`);
+  return axios.get(`${endpoints.rating}/${ratingId}`);
   //return {data: {rating: 3}};
 }
 
@@ -80,4 +116,10 @@ export const updateRating = async (userId, productId, score) => {
     comment: ""
   };
   return axios.post(`${endpoints.updateRating}`, data);
+}
+
+export const getUserId = async (login, password) => {
+  axios = await reloadAxiosUser(login, password);
+  const data = {};
+  return axios.post(`${endpoints.user}`, data);
 }

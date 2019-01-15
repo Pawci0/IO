@@ -24,7 +24,7 @@ class SearchContainer extends Component {
   }
 
   getProductsUsersBind = (event) => {
-    this.props.getProductsUsers(this.state.phrase, this.state.score, this.state.page*5+1, 5);
+    this.props.getProductsUsers(this.state.phrase, this.state.score, this.state.page*5+1, 55);
     event.preventDefault()
   }
 
@@ -52,14 +52,6 @@ class SearchContainer extends Component {
         </label>
         <input type="text" onChange={this.phraseChange} />
         <button type="submit">szukaj</button>
-        {
-          this.state.page > 1 &&
-          <button onClick={this.prev} type="submit">poprzednia strona</button>
-        }
-        {
-          this.props.products.length > this.state.page*5 &&
-          <button onClick={this.next} type="submit">następna strona</button>
-        }
         </form>
         <div>
           {this.props.products.map((value) => (
