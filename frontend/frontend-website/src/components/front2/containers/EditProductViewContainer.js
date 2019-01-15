@@ -17,8 +17,12 @@ class EditProductViewContainer extends React.Component {
     render() {
         const id = qs.parse(this.props.location.search, {ignoreQueryPrefix: true}).id;
         return (
-            <div>
-                <p>{`id: ${id}`}</p>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
                 {this.props.product &&
                 <div>
                     <form onSubmit={this.submit}>
@@ -33,7 +37,8 @@ class EditProductViewContainer extends React.Component {
                             Description:
                             <input type="text" name="name"
                                    defaultValue={this.props.product.Description}
-                                   onChange={this.handleDescriptionChange}/>
+                                   onChange={this.handleDescriptionChange}
+                                   style={{width: "500px"}}/>
                         </label>
                         <p/>
                         <input type="submit" value="Submit"/>

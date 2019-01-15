@@ -1,11 +1,11 @@
-import { GET_PRODUCT_ACTION } from './actions';
-import { GET_RECOMMENDED_ACTION } from './actions';
-import { RATE_PRODUCT_ACTION } from './actions';
+import {GET_PRODUCT_ACTION} from './actions';
+import {GET_RECOMMENDED_ACTION} from './actions';
+import {RATE_PRODUCT_ACTION} from './actions';
 import * as appRequests from '../utils/AppRequests';
 
-const getProductAction = (product) => ({ type: GET_PRODUCT_ACTION, data: product })
-const getRecommendedProductsAction = (products) => ({ type: GET_RECOMMENDED_ACTION, data: products })
-const RateProductAction = (isSuccess) => ({ type: RATE_PRODUCT_ACTION, data: { isSuccess } })
+const getProductAction = (product) => ({type: GET_PRODUCT_ACTION, data: product})
+const getRecommendedProductsAction = (products) => ({type: GET_RECOMMENDED_ACTION, data: products})
+const RateProductAction = (isSuccess) => ({type: RATE_PRODUCT_ACTION, data: {isSuccess}})
 
 export const getProduct = (id) => dispatch => {
     appRequests.getProduct(id).then(function (response) {
@@ -51,51 +51,46 @@ export const getProduct = (id) => dispatch => {
                 console.log(newProduct3);
                 dispatch(getProductAction(newProduct3));
             }).catch((error) => {
-                console.log('error ' + error);   
-             });
-            
-
-
-
+                console.log('error ' + error);
+            });
 
 
         }).catch((error) => {
-            console.log('error ' + error);   
-         });
-
+            console.log('error ' + error);
+        });
 
 
     }).catch((error) => {
-        console.log('error ' + error);   
-     });
+        console.log('error ' + error);
+    });
 }
 
 export const getRecommendedProducts = (userId) => dispatch => {
     appRequests.getRecommended(userId, 3).then(function (response) {
         const res = response.data;
-        
+
         console.log('getRecommendedProducts otrzymany:');
         console.log(res);
 
         res.map((val) => {
 
-                appRequests.updateProductCategory(val.categoryId).then(function (response) {
-                    const res = response.data;
-                    val.categoryId = res.name;
-                    
-                    appRequests.updateProductRating(val.productId).then(function (response) {
-                        const res = response.data;
-                        val.rating = res.rating;
+            appRequests.updateProductCategory(val.categoryId).then(function (response) {
+                const res = response.data;
+                val.categoryId = res.name;
 
-                    }).catch((error) => {
-                        console.log('error ' + error);   
-                    });
-                
+                appRequests.updateProductRating(val.productId).then(function (response) {
+                    const res = response.data;
+                    val.rating = res.rating;
+
                 }).catch((error) => {
-                    console.log('error ' + error);   
+                    console.log('error ' + error);
                 });
 
-        
+            }).catch((error) => {
+                console.log('error ' + error);
+            });
+
+
         });
 
         console.log('getRecommendedProducts po obrobce otrzymany:');
@@ -114,9 +109,8 @@ export const getRecommendedProducts = (userId) => dispatch => {
         dispatch(getRecommendedProductsAction(rec));
 
     }).catch((error) => {
-        console.log('error ' + error);   
+        console.log('error ' + error);
     });
-
 
 
 }
@@ -131,6 +125,10 @@ export const rateProduct = (userId, productId, score) => dispatch => {
     }).catch((error) => {
         console.log('error ' + error);
         dispatch(RateProductAction(false));
-     });
+    });
 }
 
+export const addProduct = (product) => dispatch => {
+    // request response TODO
+    alert(JSON.stringify(product));
+};
