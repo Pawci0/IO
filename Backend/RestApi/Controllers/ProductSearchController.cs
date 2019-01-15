@@ -10,7 +10,8 @@ using System.Web;
 using System.Web.Http;
 
 namespace SearchAPI.Controllers
-{
+{ 
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProductSearchController : ApiController
     {
         private ICollection<ISearch<ProductDTO>> searchEngines;

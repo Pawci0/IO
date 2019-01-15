@@ -1,9 +1,11 @@
 ﻿using ProductModule;
 using System.Net;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace CategoryApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CategoryController : ApiController
     {
         private CategoryService _categoryService;

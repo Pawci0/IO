@@ -1,9 +1,11 @@
 ﻿using ProductModule;
 using System.Net;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace RatingApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class RatingController : ApiController
     {
         private RatingService _ratingService;

@@ -3,7 +3,8 @@ using System.Net;
 using System.Web.Http;
 
 namespace ProductApi.Controllers
-{
+
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProductController : ApiController
     {
         private ProductService _productService;

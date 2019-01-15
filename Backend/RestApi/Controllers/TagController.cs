@@ -4,6 +4,7 @@ using ProductModule;
 
 namespace TagApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TagController : ApiController
     {
         private TagService _tagService;

@@ -13,6 +13,7 @@ namespace RestApi
         public static void Register(HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();
+            config.EnableCors();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
