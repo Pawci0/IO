@@ -43,5 +43,10 @@ namespace ProductModule
         {
             db.DeleteRatingById(id);
         }
+
+        public IEnumerable<Rating> GetAllRatings(int productId)
+        {
+            return db.GetAllRatings();
+        }
     }
 }
