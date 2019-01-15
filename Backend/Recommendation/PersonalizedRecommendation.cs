@@ -55,7 +55,7 @@ namespace Recommendation
             {
                 var temp = (from Product product in allProducts
                            where product.Category_Id.Equals(item.Category_Id)
-                           select product).OrderByDescending(product => product.Ratings.Sum(rating => rating.Value)/product.Ratings.Count).FirstOrDefault();
+                           select product).OrderByDescending(product => product.Ratings.Sum(rating => rating.Value)/(product.Ratings.Count == 0 ? 1 : product.Ratings.Count)).FirstOrDefault();
                 if (!temp.Equals(null))
                 {
                     allProducts.Remove(temp);
