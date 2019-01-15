@@ -49,9 +49,15 @@ class AddProductViewContainer extends React.Component {
         const {registering} = this.props;
         const {product, submitted} = this.state;
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <div className="col-md-6 col-md-offset-3" style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
                 <h2>Add new product</h2>
-                <form name="form" onSubmit={this.handleSubmit}>
+                <form name="form" onSubmit={this.handleSubmit}
+                      >
                     <div className={'form-group' + (submitted && !product.Name ? ' has-error' : '')}>
                         <label htmlFor="Category_Name">Name</label>
                         <input type="text" className="form-control" name="Name" value={product.Name}

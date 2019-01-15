@@ -48,7 +48,13 @@ class RegisterViewContainer extends React.Component {
         const {registering} = this.props;
         const {user, submitted} = this.state;
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <div className="col-md-6 col-md-offset-3"
+                 style={{
+                     display: 'flex',
+                     flexDirection: 'column',
+                     justifyContent: 'center',
+                     alignItems: 'center'
+                 }}>
                 <h2>Register</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
@@ -83,6 +89,7 @@ class RegisterViewContainer extends React.Component {
                         <div className="help-block">Password is required</div>
                         }
                     </div>
+                    <hr/>
                     <div className="form-group">
                         <button className="btn btn-primary">Register</button>
                         {registering &&

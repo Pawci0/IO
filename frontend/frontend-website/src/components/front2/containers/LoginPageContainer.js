@@ -40,7 +40,13 @@ class LoginPageContainer extends React.Component {
     render() {
         const {username, password, submitted} = this.state;
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <div className="col-md-6 col-md-offset-3"
+                 style={{
+                     display: 'flex',
+                     flexDirection: 'column',
+                     justifyContent: 'center',
+                     alignItems: 'center'
+                 }}>
                 <h2>Login</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
@@ -59,6 +65,7 @@ class LoginPageContainer extends React.Component {
                         <div className="help-block">Password is required</div>
                         }
                     </div>
+                    <hr/>
                     <div className="form-group">
                         <button className="btn btn-primary">Log in</button>
                         <Link to="/register" className="btn btn-link">Register</Link>
