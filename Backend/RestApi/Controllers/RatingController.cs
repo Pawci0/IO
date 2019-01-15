@@ -19,7 +19,7 @@ namespace RatingApi.Controllers
         }
 
         // GET: api/Rating/5
-        public int Get(int id)
+        public double Get(int id)
         {
             var allRatings = _ratingService.GetAllRatings(id);
             var ratings = allRatings.Where(r => r.Product_Id == id);
