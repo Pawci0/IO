@@ -1,10 +1,10 @@
-import { GET_PRODUCT_ACTION } from './actions';
-import { GET_RECOMMENDED_ACTION } from './actions';
-import { RATE_PRODUCT_ACTION } from './actions';
+import {GET_PRODUCT_ACTION} from './actions';
+import {GET_RECOMMENDED_ACTION} from './actions';
+import {RATE_PRODUCT_ACTION} from './actions';
 
-const getProductAction = (product) => ({ type: GET_PRODUCT_ACTION, data: product })
-const getRecommendedProductsAction = (products) => ({ type: GET_RECOMMENDED_ACTION, data: products })
-const RateProductAction = (isSuccess) => ({ type: RATE_PRODUCT_ACTION, data: { isSuccess } })
+const getProductAction = (product) => ({type: GET_PRODUCT_ACTION, data: product})
+const getRecommendedProductsAction = (products) => ({type: GET_RECOMMENDED_ACTION, data: products})
+const RateProductAction = (isSuccess) => ({type: RATE_PRODUCT_ACTION, data: {isSuccess}})
 
 export const getProduct = (id) => dispatch => {
     // request response TODO
@@ -97,11 +97,11 @@ export const getProduct = (id) => dispatch => {
     };
 
     const payload = {
-        product: mock.products[id-1]
+        product: mock.products[id - 1]
     };
 
     dispatch(getProductAction(payload.product));
-}
+};
 
 export const getRecommendedProducts = (userId) => dispatch => {
     // request response TODO
@@ -136,7 +136,7 @@ export const getRecommendedProducts = (userId) => dispatch => {
     };
 
     dispatch(getRecommendedProductsAction(payload.products));
-}
+};
 
 export const rateProduct = (userId) => dispatch => {
     // request response TODO
@@ -146,5 +146,9 @@ export const rateProduct = (userId) => dispatch => {
     const isSuccess = true;
 
     dispatch(RateProductAction(isSuccess));
-}
+};
 
+export const addProduct = (product) => dispatch => {
+    // request response TODO
+    alert(JSON.stringify(product));
+};
