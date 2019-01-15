@@ -1,4 +1,6 @@
 import {authHeader} from "../helpers/authHeader";
+import * as axios from "axios";
+
 
 export const userService = {
     login,
@@ -59,7 +61,8 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`/users/register`, requestOptions).then(handleResponse);
+    axios.default.a
+    // return fetch(`api/User/`, requestOptions).then(handleResponse);
 }
 
 function update(user) {

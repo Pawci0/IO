@@ -22,9 +22,9 @@ function login(username, password) {
             user.id = 1;
             dispatch(success(user));
         }).catch((error) => {
-            console.log('error ' + error);   
-            });
-                   
+            console.log('error ' + error);
+        });
+
     };
 
     function request(user) {
