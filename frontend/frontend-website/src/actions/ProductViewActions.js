@@ -8,53 +8,129 @@ const getRecommendedProductsAction = (products) => ({ type: GET_RECOMMENDED_ACTI
 const RateProductAction = (isSuccess) => ({ type: RATE_PRODUCT_ACTION, data: { isSuccess } })
 
 export const getProduct = (id) => dispatch => {
-    appRequests.generateAuthToken();
-    const product = appRequests.getProduct(id);
-    dispatch(getProductAction(product));
+    appRequests.getProduct(id).then(function (response) {
+        const res = response.data;
+        const newProduct = {
+            Product_id: res.productId,
+            Name: res.name,
+            Description: res.description,
+            Score: res.productId,
+            Category_Name: res.categoryId,
+            User_Username: res.userId,
+        };
+        console.log('getProduct otrzymany:');
+        console.log(newProduct);
+        dispatch(getProductAction(newProduct));
+
+        appRequests.updateProductCategory(newProduct.Category_Name).then(function (response) {
+            const res = response.data;
+            const newProduct2 = {
+                Product_id: newProduct.Product_id,
+                Name: newProduct.Name,
+                Description: newProduct.Description,
+                Score: newProduct.productId,
+                Category_Name: res.name,
+                User_Username: newProduct.User_Username,
+            };
+            console.log('updateProductCategory otrzymany:');
+            console.log(newProduct2);
+            dispatch(getProductAction(newProduct2));
+
+
+            appRequests.updateProductRating(newProduct2.Product_id).then(function (response) {
+                const res = response.data;
+                const newProduct3 = {
+                    Product_id: newProduct2.Product_id,
+                    Name: newProduct2.Name,
+                    Description: newProduct2.Description,
+                    Score: res.rating,
+                    Category_Name: newProduct2.Category_Name,
+                    User_Username: newProduct2.User_Username,
+                };
+                console.log('updateProductScore otrzymany:');
+                console.log(newProduct3);
+                dispatch(getProductAction(newProduct3));
+            }).catch((error) => {
+                console.log('error ' + error);   
+             });
+            
+
+
+
+
+
+        }).catch((error) => {
+            console.log('error ' + error);   
+         });
+
+
+
+    }).catch((error) => {
+        console.log('error ' + error);   
+     });
 }
 
 export const getRecommendedProducts = (userId) => dispatch => {
-    // request response TODO
-    // data mocking for now WIKTOR
-    const payload = {
-        products: [
-            {
-                Product_id: '9',
-                Name: 'Niegrzeczna Zosia',
-                Category_Name: 'ludzie',
-                User_Username: 'MamaZosi',
-                Description: 'Zosia była niegrzeczna więc oddam za darmo. Tylko odbiór osobisty, kontakt Priv.',
-                Score: '3'
-            },
-            {
-                Product_id: '4',
-                Name: 'Kuper Programisty',
-                Category_Name: 'ludzie',
-                User_Username: 'xXxHTMLGodxXx',
-                Description: 'Nie polecam tego produktu pryszczaty, śmierdzi i czasem wychodzi brązowy płyn',
-                Score: '2'
-            },
-            {
-                Product_id: '3',
-                Name: 'Koszulka',
-                Category_Name: 'odzież',
-                User_Username: 'LeszekW',
-                Description: 'Wiara w konstytucję to najlepsze co możecie dla siebie zrobić',
-                Score: '10'
-            }
-        ]
-    };
+    appRequests.getRecommended(userId, 3).then(function (response) {
+        const res = response.data;
+        
+        console.log('getRecommendedProducts otrzymany:');
+        console.log(res);
 
-    dispatch(getRecommendedProductsAction(payload.products));
+        res.map((val) => {
+
+                appRequests.updateProductCategory(val.categoryId).then(function (response) {
+                    const res = response.data;
+                    val.categoryId = res.name;
+                    
+                    appRequests.updateProductRating(val.productId).then(function (response) {
+                        const res = response.data;
+                        val.rating = res.rating;
+
+                    }).catch((error) => {
+                        console.log('error ' + error);   
+                    });
+                
+                }).catch((error) => {
+                    console.log('error ' + error);   
+                });
+
+        
+        });
+
+        console.log('getRecommendedProducts po obrobce otrzymany:');
+        console.log(res);
+        const rec = [];
+        res.map((val) => {
+            rec.push({
+                Product_id: val.productId,
+                Name: val.name,
+                Description: val.description,
+                Score: val.productId,
+                Category_Name: val.categoryId,
+                User_Username: val.userId,
+            });
+        });
+        dispatch(getRecommendedProductsAction(rec));
+
+    }).catch((error) => {
+        console.log('error ' + error);   
+    });
+
+
+
 }
 
-export const rateProduct = (userId) => dispatch => {
-    // request response TODO
-    // data mocking for now
+export const rateProduct = (userId, productId, score) => dispatch => {
 
-
-    const isSuccess = true;
-
-    dispatch(RateProductAction(isSuccess));
+    appRequests.updateRating(userId, productId, score).then(function (response) {
+        const res = response.data;
+        console.log('response z Rate');
+        console.log(res);
+        dispatch(RateProductAction(true));
+    }).catch((error) => {
+        console.log('error ' + error);
+        dispatch(RateProductAction(false));
+     });
 }
 

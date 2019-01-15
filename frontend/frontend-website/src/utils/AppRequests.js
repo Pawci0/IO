@@ -2,7 +2,14 @@ import * as endpoints from './AppEndpoints';
 import { auth } from "./auth";
 const Querystring = require('query-string');
 
-const axios = require('axios')
+let axios = require('axios');
+
+const reloadAxios = async () => {
+  const myaxios = require('axios');
+  const a = await generateAuthToken();
+  myaxios.defaults.headers.common['Authorization'] = a;
+  return myaxios;
+}
 
 export const generateAuthToken = async () => {
     const data = {
@@ -16,11 +23,11 @@ export const generateAuthToken = async () => {
   
       let myauth;
   
-    axios.post(`${endpoints.url}:53026/token`, Querystring.stringify(data))   
+    await axios.post(`${endpoints.url}:53026/token`, Querystring.stringify(data))   
      .then(response => {
-        console.log(response.data);
+        //console.log(response.data);
         myauth = response.data.access_token;
-        console.log('userresponse ' + response.data.access_token); 
+        //console.log('userresponse ' + response.data.access_token); 
       })   
      .catch((error) => {
         console.log('error ' + error);   
@@ -29,55 +36,48 @@ export const generateAuthToken = async () => {
   
   
   const AuthStr = 'Bearer '.concat(myauth); 
-  axios.defaults.headers.common['Authorization'] = AuthStr;
+  return AuthStr;
 }
 
-export const searchProducts = (phrase, sortType, pageIndex, pageSize) => {
-    axios.get(`${endpoints.search}/${phrase}/${sortType}/${pageIndex}/${pageSize}`) //done
-  .then(function (response) {
-    // todo response to js object
-    return response;
-  })
-  .catch(function (error) {
-    return null;
-  });
+
+export const searchProducts = async (phrase, sortType, pageIndex, pageSize) => {
+  axios = await reloadAxios();
+  return axios.get(`${endpoints.search}/${phrase}/${sortType}/${pageIndex}/${pageSize}`) //done
 }
 
-export const getRecommended = (userId, amount) => {
-    axios.get(`${endpoints.recommended}/${userId}/${amount}`) //done
-  .then(function (response) {
-    // todo response to js object
-    return response;
-  })
-  .catch(function (error) {
-    return null;
-  });
+export const getRecommended = async (userId, amount) => {
+  axios = await reloadAxios();
+  return axios.get(`${endpoints.recommended}/${userId}/${amount}`);
 }
 
 export const getProduct = async (productId) => {
-    let product = {
-        productId: null,
-        name: null,
-        categoryId: null,
-        userId: null,
-        description: null
-    };
-    
-    await axios.get(`${endpoints.product}/${productId}`)
-    //await axios.get("http://localhost:53026/api/Product/5")
-  .then(function (response) {
-    product = response.json();
-  })
-  return product;
+  axios = await reloadAxios();
+  return axios.get(`${endpoints.product}/${productId}`);
 }
 
-export const updateRating = (productId, score) => {
-    axios.get(endpoints.updateRating)
-  .then(function (response) {
-    // todo response to js object
-    return response;
-  })
-  .catch(function (error) {
-    return null;
-  });
+export const getProductNoReload = async (productId) => {
+
+  return axios.get(`${endpoints.product}/${productId}`);
+}
+
+export const updateProductCategory = async (categoryId) => {
+  //axios = await reloadAxios();
+  return axios.get(`${endpoints.category}/${categoryId}`);
+}
+
+export const updateProductRating = async (productId) => {
+  //axios = await reloadAxios();
+  return axios.get(`${endpoints.rating}/${productId}`);
+  //return {data: {rating: 3}};
+}
+
+export const updateRating = async (userId, productId, score) => {
+  //axios = await reloadAxios();
+  const data = {
+    productId: productId,
+    userId: userId,
+    value: score,
+    comment: ""
+  };
+  return axios.post(`${endpoints.updateRating}`, data);
 }

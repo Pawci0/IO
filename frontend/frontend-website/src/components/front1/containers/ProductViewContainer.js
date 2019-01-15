@@ -15,11 +15,11 @@ class ProductViewContainer extends Component {
   componentDidMount() {
     const id = qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).id;
     this.props.getProduct(id);
-    this.props.getRecommendedProducts(0); // TODO userId
+    this.props.getRecommendedProducts(1); // TODO userId
   }
 
   scoreSubmit = (event) => {
-    this.props.rateProduct(this.state.score);
+    this.props.rateProduct(1, qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).id, this.state.score);
     event.preventDefault()
   }
   scoreChange = (event) => {
