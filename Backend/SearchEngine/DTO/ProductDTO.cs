@@ -22,7 +22,7 @@ namespace SearchEngine.DTO
             Name = product.Name;
             Description = product.Description;
             Category_Name = product.Category?.Name ?? "No category";
-            User_Username = product.User.Username;
+            User_Username = product.User?.Username;
             Score = searchScore;
         }
     }
