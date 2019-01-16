@@ -12,9 +12,5 @@ export const rating = `${url}:${port}/api/Rating`;
 export const rating2 = `${url}:${port}/api/Rating`;
 
 // robie rzeczy artura
-<<<<<<< HEAD
-export const user = `${url}:${port}/api/User/GetCurrentId`;
-=======
 export const user = `${url}:${port}/api/User`;
 export const userId = `${url}:${port}/api/User/GetCurrentId`;
->>>>>>> db75178d3b67797e0f8f657ba0bebd073d649d42
