@@ -1,5 +1,6 @@
 import {authHeader} from "../helpers/authHeader";
 import * as axios from "axios";
+import {registerUser} from "../utils/AppRequests";
 
 
 export const userService = {
@@ -55,14 +56,7 @@ function getById(id) {
 }
 
 function register(user) {
-    const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(user)
-    };
-
-    axios.default.a
-    // return fetch(`api/User/`, requestOptions).then(handleResponse);
+    return registerUser(user);
 }
 
 function update(user) {

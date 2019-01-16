@@ -122,6 +122,7 @@ export const getUserId = async (login, password) => {
     return axios.post(`${endpoints.userId}`);
 }
 
-export const registerUser = async (user) => {
+export const registerUser = (user) => {
     return axios.post(`${endpoints.user}`, user);
 }
+
