@@ -29,7 +29,7 @@ namespace RestApi.Controllers
 
         [HttpGet]
         [Route("GetCurrentId")]
-        // GET: api/User/
+        // GET: api/User/GetCurrentId/5
         public int GetCurrentUserId()
         {
             return SessionContext.TryGetUserId();

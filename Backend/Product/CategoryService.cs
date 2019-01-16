@@ -40,5 +40,10 @@ namespace ProductModule
         {
             db.DeleteCategoryById(id);
         }
+
+        public IEnumerable<CategoryDto> getAllCategories()
+        {
+            return db.GetAllCategories().Select(cat => new CategoryDto(cat.Category_Id, cat.Name));
+        }
     }
 }

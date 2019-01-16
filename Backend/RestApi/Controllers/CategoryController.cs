@@ -1,4 +1,5 @@
 ﻿using ProductModule;
+using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -6,6 +7,7 @@ using System.Web.Http.Cors;
 namespace CategoryApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/Category")]
     public class CategoryController : ApiController
     {
         private CategoryService _categoryService;
@@ -23,6 +25,13 @@ namespace CategoryApi.Controllers
                 return categoryDto;
 
             throw new HttpResponseException(HttpStatusCode.NotFound);
+        }
+
+        [HttpGet]
+        [Route("GetAllCategories")]
+        public IEnumerable<CategoryDto> GetAllCategories()
+        {
+            return _categoryService.getAllCategories();
         }
 
         // POST: api/Category
