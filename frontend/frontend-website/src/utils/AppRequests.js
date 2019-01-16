@@ -134,6 +134,7 @@ export const registerUser = (user) => {
 }
 
 export const addProduct = async (product) => {
+    product.categoryId = 1;
     axios = await reloadAxios();
     return axios.post(`${endpoints.product}`, product);
 }
