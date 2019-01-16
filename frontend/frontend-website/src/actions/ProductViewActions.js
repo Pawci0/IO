@@ -98,7 +98,10 @@ export const getProduct = (id) => dispatch => {
 }
 
 export const getRecommendedProducts = (userId) => dispatch => {
-    if (!userId) userId = 1;
+    if (!userId) {
+         userId = 1;
+         console.log("nie ma usera!!");
+    }
     appRequests.getRecommended(userId, 3).then(function (response) {
         const res = response.data;
 

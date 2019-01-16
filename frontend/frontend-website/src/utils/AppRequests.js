@@ -106,9 +106,9 @@ export const updateProductUserName = async (userId) => {
   return axios.get(`${endpoints.user}/${userId}`);
 }
 
-export const updateProductRating = async (ratingId) => {
+export const updateProductRating = async (productId) => {
   //axios = await reloadAxios();
-  return axios.get(`${endpoints.rating2}/${ratingId}`);
+  return axios.get(`${endpoints.rating2}/${productId}`);
   //return {data: {rating: 3}};
 }
 
@@ -125,6 +125,5 @@ export const updateRating = async (userId, productId, score) => {
 
 export const getUserId = async (login, password) => {
   axios = await reloadAxiosUser(login, password);
-  const data = {};
-  return axios.post(`${endpoints.user}`, data);
+  return axios.get(`${endpoints.user}`);
 }
