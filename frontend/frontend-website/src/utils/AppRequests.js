@@ -128,7 +128,7 @@ export const getUserId = async (login, password) => {
 }
 
 export const registerUser = (user) => {
-    user.Email = `asd@asd.asd`;
+    user.Email = `asasdd@asd.asd`;
     //user.Surname = `surname`;
     return axios.post(`${endpoints.user}`, user);
 }

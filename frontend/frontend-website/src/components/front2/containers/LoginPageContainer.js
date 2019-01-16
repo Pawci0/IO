@@ -72,7 +72,7 @@ class LoginPageContainer extends React.Component {
                     </div>
                 </form>
                 <br></br>
-                <a href={`/search?userid=${1}`}>szukajka </a>
+                <a href={`/search`}>szukajka </a>
             </div>
         );
     }
