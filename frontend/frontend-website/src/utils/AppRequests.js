@@ -100,9 +100,14 @@ export const updateProductCategory = async (categoryId) => {
     return axios.get(`${endpoints.category}/${categoryId}`);
 }
 
+export const updateProductUserName = async (userId) => {
+  //axios = await reloadAxios();
+  return axios.get(`${endpoints.user}/${userId}`);
+}
+
 export const updateProductRating = async (ratingId) => {
     //axios = await reloadAxios();
-    return axios.get(`${endpoints.rating}/${ratingId}`);
+    return axios.get(`${endpoints.rating2}/${ratingId}`);
     //return {data: {rating: 3}};
 }
 

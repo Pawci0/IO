@@ -1,7 +1,8 @@
 import {userConstants} from '../../constants/userConstants';
 
 let user = JSON.parse(localStorage.getItem('user'));
-const initialState = user ? {loggedIn: true, user} : {};
+if (!user) user = {};
+const initialState = user ? {loggedIn: true, user: {} } : {user};
 
 export function authenticationReducer(state = initialState, action) {
     switch (action.type) {

@@ -9,13 +9,12 @@ class ProductViewContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {score: 1};
+    this.state = {id: undefined, score: 1};
   }
 
   componentDidMount() {
-    const id = qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).id;
-    this.props.getProduct(id);
-    this.props.getRecommendedProducts(1); // TODO userId
+
+ // TODO userId
   }
 
   scoreSubmit = (event) => {
@@ -23,7 +22,7 @@ class ProductViewContainer extends Component {
     event.preventDefault()
   }
   scoreChange = (event) => {
-    this.setState({score: event.target.value});
+    this.setState({id: this.state.id, score: event.target.value});
     event.preventDefault()
   }
 
@@ -31,6 +30,11 @@ class ProductViewContainer extends Component {
   render() {
     const scores = [1,2,3,4,5,6,7,8,9,10];
     const id = qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).id;
+    if (!this.state.id) {
+      this.setState({id: id, score: this.state.score});
+      this.props.getProduct(id);
+      this.props.getRecommendedProducts(this.props.userId);
+    }
     return (
       <div>
         <p>{`id: ${id}`}</p>
@@ -75,6 +79,7 @@ class ProductViewContainer extends Component {
 const mapStateToProps = (state) => ({
   product: state.product.product,
   recommendedProducts: state.product.recommendedProducts,
+  userId: state.authentication.user.id,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(
