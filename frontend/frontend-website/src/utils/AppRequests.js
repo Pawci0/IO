@@ -85,13 +85,18 @@ export const getRecommended = async (userId, amount) => {
     return axios.get(`${endpoints.recommended}/${userId}/${amount}`);
 }
 
+
 export const getProduct = async (productId) => {
     axios = await reloadAxios();
     return axios.get(`${endpoints.product}/${productId}`);
 }
 
-export const getProductNoReload = async (productId) => {
+export const editProduct = async (product) => {
+    axios = await reloadAxios();
+    return axios.put(`${endpoints.product}/${productId}`);
+}
 
+export const getProductNoReload = async (productId) => {
     return axios.get(`${endpoints.product}/${productId}`);
 }
 
