@@ -16,7 +16,7 @@ export const getProductsUsers = (phrase, sortType, pageIndex, pageSize) => dispa
         const rec = [];
         res.map((val) => {
             rec.push({
-                Product_id: val.productId,
+                Product_id: val.product_Id,
                 Name: val.name,
             });
         });

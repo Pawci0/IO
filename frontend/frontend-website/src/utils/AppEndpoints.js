@@ -9,6 +9,7 @@ export const recommended = `${url}:${port}/api/Recommendation`;
 // to jest jakiś żart, że ja to wgl musze obsługiwać
 export const category = `${url}:${port}/api/Category`;
 export const rating = `${url}:${port}/api/Rating`;
+export const rating2 = `${url}:${port}/api/Rating`;
 
 // robie rzeczy artura
 export const user = `${url}:${port}/api/User`;

@@ -8,6 +8,7 @@ const getRecommendedProductsAction = (products) => ({type: GET_RECOMMENDED_ACTIO
 const RateProductAction = (isSuccess) => ({type: RATE_PRODUCT_ACTION, data: {isSuccess}})
 
 export const getProduct = (id) => dispatch => {
+    console.log('getProduct siema');
     appRequests.getProduct(id).then(function (response) {
         const res = response.data;
         const newProduct = {
@@ -34,25 +35,56 @@ export const getProduct = (id) => dispatch => {
             };
             console.log('updateProductCategory otrzymany:');
             console.log(newProduct2);
-            dispatch(getProductAction(newProduct2));
+            //dispatch(getProductAction(newProduct2));
 
-
-            appRequests.updateProductRating(newProduct2.Product_id).then(function (response) {
+            appRequests.updateProductUserName(newProduct2.User_Username).then(function (response) {
                 const res = response.data;
                 const newProduct3 = {
                     Product_id: newProduct2.Product_id,
                     Name: newProduct2.Name,
                     Description: newProduct2.Description,
-                    Score: res.rating,
+                    Score: newProduct2.Score,
                     Category_Name: newProduct2.Category_Name,
-                    User_Username: newProduct2.User_Username,
+                    User_Username: res.username,
                 };
-                console.log('updateProductScore otrzymany:');
+                console.log('updateProductUserName otrzymany:');
                 console.log(newProduct3);
-                dispatch(getProductAction(newProduct3));
+                //dispatch(getProductAction(newProduct3));
+
+
+                appRequests.updateProductRating(newProduct3.Product_id).then(function (response) {
+                    const res = response.data;
+                    const newProduct4 = {
+                        Product_id: newProduct3.Product_id,
+                        Name: newProduct3.Name,
+                        Description: newProduct3.Description,
+                        Score: res,
+                        Category_Name: newProduct3.Category_Name,
+                        User_Username: newProduct3.User_Username,
+                    };
+                    console.log('updateProductScore otrzymany:');
+                    console.log(newProduct4);
+                    dispatch(getProductAction(newProduct4));
+    
+    
+    
+    
+    
+    
+                }).catch((error) => {
+                    console.log('error ' + error);
+                });
+
+
             }).catch((error) => {
                 console.log('error ' + error);
             });
+
+
+
+
+
+            
 
 
         }).catch((error) => {
@@ -66,6 +98,7 @@ export const getProduct = (id) => dispatch => {
 }
 
 export const getRecommendedProducts = (userId) => dispatch => {
+    if (!userId) userId = 1;
     appRequests.getRecommended(userId, 3).then(function (response) {
         const res = response.data;
 
