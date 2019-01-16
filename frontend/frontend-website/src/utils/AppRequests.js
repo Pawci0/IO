@@ -133,8 +133,9 @@ export const getUserId = async (login, password) => {
 }
 
 export const registerUser = (user) => {
-    user.Email = `asd@asd.asd`;
-    //user.Surname = `surname`;
+    user.Email = `asd` + Math.random() + `@asd.asd`;
+    user.Surname = `surname`;
+    user.Name = `sasdfasdf`;
     return axios.post(`${endpoints.user}`, user);
 }
 
