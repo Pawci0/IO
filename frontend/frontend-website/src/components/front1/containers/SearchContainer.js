@@ -5,6 +5,7 @@ import { getProductsUsers } from '../../../actions/SearchPageActions'
 import { bindActionCreators } from 'redux'
 import ProductIcon from '../ProductIcon';
 import Pasek from '../../common/Pasek';
+import * as qs from 'query-string'
 
 class SearchContainer extends Component {
 
@@ -38,10 +39,10 @@ class SearchContainer extends Component {
 
   render() {
     const scores = ["ignore", "ascending", "descending"];
-
+    const userId = qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).userid;
     return (
       <div>
-        <Pasek />
+        <Pasek userId={userId} />
         <form onSubmit={this.getProductsUsersBind}>
         <label>
           <select value={this.state.score} onChange={this.scoreChange}>
@@ -55,7 +56,7 @@ class SearchContainer extends Component {
         </form>
         <div>
           {this.props.products.map((value) => (
-            <ProductIcon link={'/product'} id={value.Product_id} name = {value.Name} />
+            <ProductIcon userId={userId} link={'/product'} id={value.Product_id} name = {value.Name} />
           ))}
         </div>
         

@@ -30,10 +30,11 @@ class ProductViewContainer extends Component {
   render() {
     const scores = [1,2,3,4,5,6,7,8,9,10];
     const id = qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).id;
+    const userid = qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).userid;
     if (!this.state.id) {
       this.setState({id: id, score: this.state.score});
       this.props.getProduct(id);
-      this.props.getRecommendedProducts(this.props.userId);
+      this.props.getRecommendedProducts(userid);
     }
     return (
       <div>
@@ -62,14 +63,14 @@ class ProductViewContainer extends Component {
           {this.props.recommendedProducts &&
             <div>
               {this.props.recommendedProducts.map((value) => (
-                <ProductIcon link={'/product'} id={value.Product_id} name = {value.Name} />
+                <ProductIcon userId={userid} link={'/product'} id={value.Product_id} name = {value.Name} />
               ))}
             </div>
           }
         </div>
         <div>
           <br></br>
-          <a href="/search">powrót do szukajki</a>
+          <a href={`/search?userid=${userid}`}>powrót do szukajki</a>
         </div>
       </div>
     );

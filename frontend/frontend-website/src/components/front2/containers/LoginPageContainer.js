@@ -72,18 +72,15 @@ class LoginPageContainer extends React.Component {
                     </div>
                 </form>
                 <br></br>
-                <a href="/search">szukajka </a>
+                <a href={`/search?userid=${1}`}>szukajka </a>
             </div>
         );
     }
 }
 
-function mapStateToProps(state) {
-    const loggingIn = state.authentication;
-    return {
-        loggingIn
-    };
-}
+const mapStateToProps = (state) => ({
+    loggingIn: state.authentication,
+  })
 
 const connectedLoginPage = connect(mapStateToProps)(LoginPageContainer);
 export {connectedLoginPage as LoginPageContainer};
