@@ -124,10 +124,12 @@ export const updateRating = async (userId, productId, score) => {
 
 export const getUserId = async (login, password) => {
     axios = await reloadAxiosUser(login, password);
-    return axios.post(`${endpoints.userId}`);
+    return axios.get(`${endpoints.userId}`);
 }
 
 export const registerUser = (user) => {
+  user.Email = `asd@asd.asd`;
+  //user.Surname = `surname`;
     return axios.post(`${endpoints.user}`, user);
 }
 
