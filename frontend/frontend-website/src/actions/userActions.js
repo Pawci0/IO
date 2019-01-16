@@ -19,7 +19,7 @@ function login(username, password) {
             const res = response.data;
             console.log('user ID');
             console.log(res);
-            user.id = 1;
+            user.id = res;
             dispatch(success(user));
         }).catch((error) => {
             console.log('error ' + error);

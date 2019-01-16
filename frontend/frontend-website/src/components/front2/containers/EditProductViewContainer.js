@@ -11,11 +11,18 @@ class EditProductViewContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {id2: null};
     }
 
     render() {
         const id = qs.parse(this.props.location.search, {ignoreQueryPrefix: true}).id;
+        if (!id) {
+            id = 1;
+        }
+        if (!this.state.id2) {
+            this.setState({id2: id});
+            this.props.getProduct(id);
+        }
         return (
             <div style={{
                 display: 'flex',
