@@ -101,8 +101,8 @@ export const updateProductCategory = async (categoryId) => {
 }
 
 export const updateProductUserName = async (userId) => {
-  //axios = await reloadAxios();
-  return axios.get(`${endpoints.user}/${userId}`);
+    //axios = await reloadAxios();
+    return axios.get(`${endpoints.user}/${userId}`);
 }
 
 export const updateProductRating = async (ratingId) => {
@@ -128,8 +128,45 @@ export const getUserId = async (login, password) => {
 }
 
 export const registerUser = (user) => {
-  user.Email = `asd@asd.asd`;
-  //user.Surname = `surname`;
+    user.Email = `asd@asd.asd`;
+    //user.Surname = `surname`;
     return axios.post(`${endpoints.user}`, user);
 }
 
+export const addProduct = async (product) => {
+    product.categoryId = 1;
+    axios = await reloadAxios();
+    return axios.post(`${endpoints.product}`, product);
+}
+
+/**
+ * {
+jak chcesz POSTowac, to usuwasz z nich tylko id
+kategoria:
+{
+    categoryId:
+    name:
+}
+produkt:
+{
+    productId:
+    name:
+    categoryId:
+    userId:
+    description:
+}
+Rating:
+{
+    ratingId:
+    productId:
+    userId:
+    value:
+    comment:
+}
+Tag:
+{
+    tagId:
+    name:
+}
+oczywiscie id odpow
+ */

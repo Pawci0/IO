@@ -65,12 +65,7 @@ export const getProduct = (id) => dispatch => {
                     console.log('updateProductScore otrzymany:');
                     console.log(newProduct4);
                     dispatch(getProductAction(newProduct4));
-    
-    
-    
-    
-    
-    
+
                 }).catch((error) => {
                     console.log('error ' + error);
                 });
@@ -79,13 +74,6 @@ export const getProduct = (id) => dispatch => {
             }).catch((error) => {
                 console.log('error ' + error);
             });
-
-
-
-
-
-            
-
 
         }).catch((error) => {
             console.log('error ' + error);
@@ -99,8 +87,8 @@ export const getProduct = (id) => dispatch => {
 
 export const getRecommendedProducts = (userId) => dispatch => {
     if (!userId) {
-         userId = 1;
-         console.log("nie ma usera!!");
+        userId = 1;
+        console.log("nie ma usera!!");
     }
     appRequests.getRecommended(userId, 3).then(function (response) {
         const res = response.data;
@@ -165,6 +153,7 @@ export const rateProduct = (userId, productId, score) => dispatch => {
 }
 
 export const addProduct = (product) => dispatch => {
-    // request response TODO
-    alert(JSON.stringify(product));
+    appRequests.addProduct(product).then(() => {
+        alert("product")
+    });
 };
