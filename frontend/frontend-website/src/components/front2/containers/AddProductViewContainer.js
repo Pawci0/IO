@@ -3,6 +3,7 @@ import * as React from "react";
 import connect from "react-redux/es/connect/connect";
 import {Link} from "react-router-dom";
 import {addProduct} from "../../../actions/ProductViewActions";
+import * as qs from 'query-string'
 
 // const axios = a.default;
 
@@ -14,7 +15,8 @@ class AddProductViewContainer extends React.Component {
             product: {
                 Description: '',
                 Category_Name: '',
-                Name: ''
+                Name: '',
+                User_Id: ''
             },
             submitted: false
         };
@@ -48,6 +50,8 @@ class AddProductViewContainer extends React.Component {
     render() {
         const {registering} = this.props;
         const {product, submitted} = this.state;
+        const userid = qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).userid;
+        product.User_Id = userid;
         return (
             <div className="col-md-6 col-md-offset-3" style={{
                 display: 'flex',
@@ -89,7 +93,7 @@ class AddProductViewContainer extends React.Component {
                             src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
                             alt={""}/>
                         }
-                        <Link to="/search" className="btn btn-link">Cancel</Link>
+                        <Link to={`/search?userid=${userid}`} className="btn btn-link">Powrót</Link>
                     </div>
                 </form>
             </div>

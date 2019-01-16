@@ -1,8 +1,9 @@
 import {userConstants} from '../../constants/userConstants';
 
-let user = JSON.parse(localStorage.getItem('user'));
-if (!user) user = {};
-const initialState = user ? {loggedIn: true, user: {} } : {user};
+const initialState = {
+    user:{
+    }
+}
 
 export function authenticationReducer(state = initialState, action) {
     switch (action.type) {
@@ -12,6 +13,9 @@ export function authenticationReducer(state = initialState, action) {
                 user: action.user
             };
         case userConstants.LOGIN_SUCCESS:
+            console.log("userId w reducerze");
+            console.log(window.location);
+            window.location = window.location.href.replace("login", `search?userid=${action.user.id}`);
             return {
                 loggedIn: true,
                 user: action.user
@@ -21,6 +25,6 @@ export function authenticationReducer(state = initialState, action) {
         case userConstants.LOGOUT:
             return {};
         default:
-            return state
+            return initialState;
     }
 }

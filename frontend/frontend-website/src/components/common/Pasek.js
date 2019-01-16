@@ -8,10 +8,12 @@ class Pasek extends Component {
   }
 
   render() {
+    console.log("siemaneczko userId: ");
+    console.log(this.props.userId);
     return (
       <div>
           {
-          !this.props.user &&
+          !this.props.userId &&
           <div>
           <span>
             <a href="/login">zaloguj</a>
@@ -23,10 +25,13 @@ class Pasek extends Component {
           </div>
           }
           {
-          this.props.user &&
+          this.props.userId &&
           <div>
           <span>
             <a href="/search">wyloguj </a>
+          </span>
+          <span>
+            <a href={`/add_product?userid=${this.props.userId}`}>dodaj produkt </a>
           </span>
           </div>
           }
@@ -36,13 +41,7 @@ class Pasek extends Component {
     );
   }
 };
-
-const mapStateToProps = (state) => ({
-    user: state.user,
-  })
   
-  export default connect(
-    mapStateToProps,
-  )(Pasek)
+  export default Pasek
   
 
