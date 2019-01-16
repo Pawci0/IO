@@ -16,11 +16,11 @@ export const getProduct = (id) => dispatch => {
 };
 
 export const editProduct = (product, id) => dispatch => {
-    product.categoryId = 1;
-    product.productId = id;
-    product.userId = userId;
-    appRequests.editProduct(product).then(() => {
-        dispatch(updateProductAction());
-    })
+    //product.categoryId = 1;
+    //product.productId = id;
+    //product.userId = userId;
+    //appRequests.editProduct(product).then(() => {
+        //dispatch(updateProductAction());
+    //})
 };
 
