@@ -138,35 +138,3 @@ export const addProduct = async (product) => {
     axios = await reloadAxios();
     return axios.post(`${endpoints.product}`, product);
 }
-
-/**
- * {
-jak chcesz POSTowac, to usuwasz z nich tylko id
-kategoria:
-{
-    categoryId:
-    name:
-}
-produkt:
-{
-    productId:
-    name:
-    categoryId:
-    userId:
-    description:
-}
-Rating:
-{
-    ratingId:
-    productId:
-    userId:
-    value:
-    comment:
-}
-Tag:
-{
-    tagId:
-    name:
-}
-oczywiscie id odpow
- */
